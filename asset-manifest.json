@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/express-shop/static/css/main.7acaea2f.css",
-    "main.js": "/express-shop/static/js/main.07d3183d.js",
+    "main.js": "/express-shop/static/js/main.e64006c2.js",
     "index.html": "/express-shop/index.html",
     "main.7acaea2f.css.map": "/express-shop/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/express-shop/static/js/main.07d3183d.js.map"
+    "main.e64006c2.js.map": "/express-shop/static/js/main.e64006c2.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/js/main.e64006c2.js"
   ]
 }
