@@ -10,9 +10,13 @@ export const Header = ({ items }) => {
 		<header className={sass.header}>
 			<div className="container">
 				<div className={sass.header__inner}>
-					<HeaderLogo />
-					<Basket />
-					<ProductList items={items} />
+					<div className={sass.header__top}>
+						<HeaderLogo />
+					</div>
+					<div className={sass.header__bottom}>
+						<ProductList items={items} />
+						<Basket />
+					</div>
 				</div>
 			</div>
 		</header>
