@@ -1,0 +1,11 @@
+@import '../../sass/_variables.scss';
+
+.basket {
+  text-align: right;
+}
+
+.basket__btn {
+  & > svg {
+    fill: $--accent-color;
+  }
+}
