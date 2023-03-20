@@ -1,0 +1,23 @@
+.socialList {
+  display: flex;
+  gap: 8px;
+}
+
+.footerWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  background-color: indigo;
+  border-radius: 16px;
+}
+
+.infoBlock {
+  gap: 8px;
+}
+
+.CR {
+  text-align: center;
+  display: block;
+}
