@@ -1,21 +1,8 @@
 [
   {
-    "type": "header",
-    "version": "5.2.0",
-    "comment": "Export to JSON plugin for PHPMyAdmin"
-  },
-  { "type": "database", "name": "express_shop" },
-  {
-    "type": "table",
-    "name": "bags",
-    "database": "express_shop",
-    "data": [
-      {
-        "id": "1",
-        "name": "Женская сумка",
-        "description": "Random descr",
-        "price": "1500"
-      }
-    ]
+    "id": "1",
+    "name": "Женская сумка",
+    "description": "Random descr",
+    "price": "1500"
   }
 ]
