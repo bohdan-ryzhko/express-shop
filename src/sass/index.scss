@@ -1,3 +1,43 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  padding: 0;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
 @import './_mixins.scss';
 @import './_variables.scss';
 @import './_utils.scss';
