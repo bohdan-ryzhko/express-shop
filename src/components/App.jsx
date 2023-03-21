@@ -1,8 +1,9 @@
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import headerUrls from '../data/header_link';
 import { Fragment } from 'react';
 import { MainPage } from './MainPage/MainPage';
+
+import headerUrls from '../data/header_link';
 
 export const App = () => {
   return (
