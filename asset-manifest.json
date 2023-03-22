@@ -1,15 +1,14 @@
 {
   "files": {
-    "main.css": "/express-shop/static/css/main.1baec83b.css",
-    "main.js": "/express-shop/static/js/main.2467962e.js",
-    "static/media/page.png": "/express-shop/static/media/page.031a6016285737bd9bb0.png",
+    "main.css": "/express-shop/static/css/main.926412da.css",
+    "main.js": "/express-shop/static/js/main.961b19f7.js",
     "static/media/logo-1.png": "/express-shop/static/media/logo-1.0450a0e01def00a176d0.png",
     "index.html": "/express-shop/index.html",
-    "main.1baec83b.css.map": "/express-shop/static/css/main.1baec83b.css.map",
-    "main.2467962e.js.map": "/express-shop/static/js/main.2467962e.js.map"
+    "main.926412da.css.map": "/express-shop/static/css/main.926412da.css.map",
+    "main.961b19f7.js.map": "/express-shop/static/js/main.961b19f7.js.map"
   },
   "entrypoints": [
-    "static/css/main.1baec83b.css",
-    "static/js/main.2467962e.js"
+    "static/css/main.926412da.css",
+    "static/js/main.961b19f7.js"
   ]
 }
