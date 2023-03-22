@@ -4,8 +4,8 @@ import sass from "./CategoryList.module.scss";
 export const CategoryList = ({ items }) => {
 	return (
 		<nav className={sass.navigation}>
-			<ul className={sass.product__list}>
-				{items.map(({ linkName, id }) => <li key={id} className={sass.product__item}>
+			<ul className={sass.category__list}>
+				{items.map(({ linkName, id }) => <li key={id} className={sass.category__item}>
 					<CategoryLink>{linkName}</CategoryLink>
 				</li>)}
 			</ul>
