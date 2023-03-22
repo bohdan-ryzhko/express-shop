@@ -5,9 +5,18 @@
   height: 100%;
   padding-left: 15px;
   padding-right: 15px;
-  max-width: 1980px;
+  width: 100%;
 
   @include mobile {
+    max-width: 600px;
     margin: 0 auto;
+  }
+
+  @include tablet {
+    max-width: 1000px;
+  }
+
+  @include desktop {
+    max-width: 1300px;
   }
 }
