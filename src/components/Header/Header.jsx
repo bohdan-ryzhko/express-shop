@@ -1,5 +1,5 @@
 import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
-import { ProductList } from "../ProductList/ProductList";
+import { CategoryList } from "../CategoryList/CategoryList";
 import { Basket } from "components/Basket/Basket";
 // import logo from "images/logo/logo";
 
@@ -14,7 +14,7 @@ export const Header = ({ items }) => {
 						<HeaderLogo />
 					</div>
 					<div className={sass.header__bottom}>
-						<ProductList items={items} />
+						<CategoryList items={items} />
 						<Basket />
 					</div>
 				</div>

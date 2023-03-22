@@ -1,0 +1,32 @@
+.navigation {
+  margin-bottom: 10px;
+}
+
+.category__list {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.category__item {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: center left;
+    transform: scaleX(0);
+    background-color: #000;
+    transition: all 0.7s ease;
+  }
+
+  &:hover {
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}

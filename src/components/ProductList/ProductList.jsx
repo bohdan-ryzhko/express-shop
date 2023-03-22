@@ -1,14 +1,22 @@
-import { ProductLink } from "./ProductLink/ProductLink";
 import sass from "./ProductList.module.scss";
+import { Product } from "./Product/Product";
+import { ProductTitle } from "./ProductTitle/ProductTitle";
 
-export const ProductList = ({ items }) => {
+export const ProductList = ({ list, title }) => {
+	console.log(list);
 	return (
-		<nav className={sass.navigation}>
-			<ul className={sass.product__list}>
-				{items.map(({ linkName, id }) => <li key={id} className={sass.product__item}>
-					<ProductLink>{linkName}</ProductLink>
-				</li>)}
-			</ul>
-		</nav>
+		<main className="main__product-page">
+			<div className="container">
+				<div className="product__list-inner">
+					<ProductTitle title={title} />
+					<ul className={sass.product__list}>
+						{
+							list.map((product) =>
+								<Product product={product} key={product.vendorCode} />)
+						}
+					</ul>
+				</div>
+			</div>
+		</main>
 	)
 }
