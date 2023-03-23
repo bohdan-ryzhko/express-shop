@@ -11,7 +11,6 @@ export const Product = ({ product: {
 } }) => {
 
 	const { height } = sizeImages;
-
 	return (
 		<li className={sass.product__item}>
 			<div className={sass.product__itemWrapper}>
