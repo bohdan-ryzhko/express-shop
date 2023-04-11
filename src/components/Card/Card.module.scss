@@ -1,0 +1,32 @@
+.productCardTitle {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.productCardThumb {
+  justify-content: center;
+  display: flex;
+  gap: 32px;
+}
+
+.productCardDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+
+.productCardSizes {
+  display: flex;
+  gap: 24px;
+}
+
+.productCardPurchaseOptions {
+  display: flex;
+  gap: 32px;
+}
+
+.productCardQuantityOptions {
+  display: flex;
+  flex-direction: column;
+}
