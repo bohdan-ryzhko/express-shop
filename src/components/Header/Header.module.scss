@@ -26,3 +26,25 @@
 .header__bottom {
   width: 100%;
 }
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navLink {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: #000;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

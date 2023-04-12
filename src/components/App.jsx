@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 // import Card from './Card/Card';
 // import { MainPage } from './MainPage/MainPage';
 
-import headerUrls from '../data/header_link';
 import underwear from '../data/underwear';
 import bags from "../data/bags";
 import { ProductList } from './ProductList/ProductList';
@@ -27,7 +26,7 @@ const { yml_catalog: { shop: { categories: { category: { bagsTitlte } }, offers:
 export const App = () => {
   return (
     <Fragment>
-      <Header items={headerUrls} />
+      <Header />
       {/* <Card /> */}
       {/* <MainPage /> */}
       <Routes>

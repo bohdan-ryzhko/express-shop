@@ -1,11 +1,10 @@
+import sass from "./Header.module.scss";
 import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
 import { Basket } from "components/Basket/Basket";
-// import logo from "images/logo/logo";
 import { NavLink } from 'react-router-dom';
 
-import sass from "./Header.module.scss";
 
-export const Header = ({ items }) => {
+export const Header = () => {
 	return (
 		<header className={sass.header}>
 			<div className="container">
@@ -13,14 +12,13 @@ export const Header = ({ items }) => {
 					<div className={sass.header__top}>
 						<HeaderLogo />
 					</div>
-					<nav>
-						<NavLink to="/bags" >Сумки</NavLink>
-						<NavLink to="/underwear" >Чоловіча білизна</NavLink>
-					</nav>
-					<Basket />
-					{/* <div className={sass.header__bottom}>
-						<CategoryList items={items} />
-					</div> */}
+					<div className={sass.header__bottom}>
+						<nav className={sass.headerNav}>
+							<NavLink className={sass.navLink} to="/bags" >Сумки</NavLink>
+							<NavLink className={sass.navLink} to="/underwear" >Чоловіча білизна</NavLink>
+						</nav>
+						<Basket />
+					</div>
 				</div>
 			</div>
 		</header>
