@@ -7,6 +7,8 @@ import bagsData from "../data/bags";
 import { ProductList } from './ProductList/ProductList';
 import { Routes, Route } from 'react-router-dom';
 import { Home } from './Home/Home';
+import { Basket } from './Basket/Basket';
+import { useState } from 'react';
 
 const {
   yml_catalog: {
@@ -32,9 +34,13 @@ const {
 } = bagsData;
 
 export const App = () => {
+
+  const [toggleBasket, setToggleBasket] = useState(false);
+
   return (
     <>
-      <Header />
+      <Basket toggleBasket={toggleBasket} setToggleBasket={setToggleBasket} />
+      <Header setToggleBasket={setToggleBasket} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/bags" element={<ProductList title={bagsTitlte} list={bags} />} />
