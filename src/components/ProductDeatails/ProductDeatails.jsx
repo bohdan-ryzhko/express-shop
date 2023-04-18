@@ -6,9 +6,10 @@ import sass from './ProductDeatails.module.scss';
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Navigation, Pagination, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { BiArrowBack } from 'react-icons/bi';
+
 import { getProductCard } from 'services/getProductCard';
 
 import underwearData from '../../data/underwear';
@@ -21,7 +22,7 @@ const productCardOptions = {
   bags,
 }
 
-export const ProductDeatails = () => {
+export const ProductDeatails = ({ setCurrentPosition }) => {
   const { product, productId } = useParams();
   const productItem = getProductCard(product, productId, productCardOptions);
   console.log(productItem);
@@ -29,7 +30,12 @@ export const ProductDeatails = () => {
   const location = useLocation();
 
   const backLinkRef = useRef(location.state?.from ?? "/");
-  console.log(backLinkRef);
+  console.log(backLinkRef.current);
+
+  useEffect(() => {
+    setCurrentPosition(Number(backLinkRef.current.search.split(/[^0-9]/).join("")));
+  }, [setCurrentPosition]);
+
 
   return (
     productItem &&
