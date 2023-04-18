@@ -41,3 +41,12 @@ button {
 }
 
 @import './_helper.scss';
+
+.swiper {
+  @include desktop {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  max-width: 500px;
+  height: 550px;
+}
