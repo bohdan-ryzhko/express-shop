@@ -1,3 +1,5 @@
+@import '../../sass/helper';
+
 .productDetails {
   padding: 20px 0;
 }
@@ -8,8 +10,10 @@
 }
 
 .productCardThumb {
-  display: flex;
-  gap: 32px;
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .productImage {
@@ -20,10 +24,13 @@
 }
 
 .productCardDescription {
+  @include desktop {
+    max-width: 500px;
+  }
   display: flex;
   flex-direction: column;
-  gap: 12px;
   justify-content: center;
+  gap: 12px;
 }
 
 .productCardSizes {

@@ -2,8 +2,11 @@
 @import './sass/index.scss';
 
 .swiper {
+  @include desktop {
+    margin-left: 0;
+    margin-right: 0;
+  }
   max-width: 500px;
-  margin-left: 0;
   height: 550px;
 }
 /* bring in normalize.css styles */

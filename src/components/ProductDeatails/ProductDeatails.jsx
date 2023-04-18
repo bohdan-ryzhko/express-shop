@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { Navigation, Pagination, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+//1791180090
+
 import { getProductCard } from 'services/getProductCard';
 
 import underwearData from '../../data/underwear';
