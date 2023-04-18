@@ -1,26 +1,34 @@
-import underwear from '../../data/underwear';
 import sass from './Card.module.scss';
-import { nanoid } from 'nanoid';
+import { useParams } from "react-router-dom";
 
-const {
-  yml_catalog: {
-    shop: {
-      offers: { underwearOffer },
-    },
-  },
-} = underwear;
-const productItem = underwearOffer[0];
+import { getProductCard } from 'services/getProductCard';
 
-const Card = () => {
-  console.log(productItem);
+import underwearData from '../../data/underwear';
+import bagsData from "../../data/bags";
+const { yml_catalog: { shop: { offers: { underwear } } } } = underwearData;
+const { yml_catalog: { shop: { offers: { bags } } } } = bagsData;
+
+const productCardOptions = {
+  underwear,
+  bags,
+}
+
+export const Card = () => {
+  const { product, productId } = useParams();
+  const productItem = getProductCard(product, productId, productCardOptions);
 
   return (
+    productItem &&
     <div className="container">
       <section className={sass.productCard}>
         <h2 className={sass.productCardTitle}>{productItem.name_ua}</h2>
         <div className={sass.productCardThumb}>
           <img
-            src={productItem.picture[0]}
+            src={
+              Array.isArray(productItem.pictire)
+                ? productItem.picture[0]
+                : productItem.picture
+            }
             alt={productItem.name_ua}
             width={680}
             height={540}
@@ -35,12 +43,20 @@ const Card = () => {
             <p>Бренд: {productItem.vendor}</p>
             <p>{productItem.description_ua}</p>
             <div className={sass.productCardSizes}>
-              Виберіть розмір
-              {productItem.param[2].text.split('|').map(el => (
-                <button type="radio" name="sizes" value={el} key={nanoid()}>
-                  {el}
-                </button>
-              ))}
+              {
+                productItem.param[2] &&
+                <>
+                  <p>Виберіть розмір</p>
+                  {
+                    productItem.param[2].text.split('|').map(el => (
+                      <button type="radio" name="sizes" value={el} key={el}>
+                        {el}
+                      </button>
+                    ))
+                  }
+                </>
+                  
+              }
             </div>
             <div className={sass.productCardPurchaseOptions}>
               <div className={sass.productCardQuantityOptions}>
@@ -59,5 +75,3 @@ const Card = () => {
     </div>
   );
 };
-
-export default Card;

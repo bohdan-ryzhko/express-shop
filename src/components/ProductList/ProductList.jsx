@@ -1,6 +1,6 @@
 import sass from "./ProductList.module.scss";
-import { Product } from "./Product/Product";
-import { ProductTitle } from "./ProductTitle/ProductTitle";
+import { Product } from "../Product/Product";
+import { ProductTitle } from "../ProductTitle/ProductTitle";
 import { useState } from "react";
 import { LoadMoreButton } from "components/LoadMoreButton/LoadMoreButton";
 import { PAGINATION_ITEMS_COUNT } from "constants/paginationItem";

@@ -1,5 +1,5 @@
 import sass from "./Header.module.scss";
-import { HeaderLogo } from "./HeaderLogo/HeaderLogo";
+import { HeaderLogo } from "../HeaderLogo/HeaderLogo";
 import { Basket } from "components/Basket/Basket";
 import { NavLink } from 'react-router-dom';
 

@@ -1,10 +1,9 @@
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import { Fragment } from 'react';
-// import Card from './Card/Card';
+import { Card } from './Card/Card';
 
-import underwear from '../data/underwear';
-import bags from "../data/bags";
+import underwearData from '../data/underwear';
+import bagsData from "../data/bags";
 import { ProductList } from './ProductList/ProductList';
 import { Routes, Route } from 'react-router-dom';
 import { Home } from './Home/Home';
@@ -15,24 +14,24 @@ const {
       categories: {
         category: { underwearTitle },
       },
-      offers: { underwearOffer },
+      offers: { underwear },
     },
   },
-} = underwear;
+} = underwearData;
 
-const { yml_catalog: { shop: { categories: { category: { bagsTitlte } }, offers: { bagsOffer } } } } = bags;
+const { yml_catalog: { shop: { categories: { category: { bagsTitlte } }, offers: { bags } } } } = bagsData;
 
 export const App = () => {
   return (
-    <Fragment>
+    <>
       <Header />
-      {/* <Card /> */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/bags" element={<ProductList title={bagsTitlte} list={bagsOffer} />} />
-        <Route path="/underwear" element={<ProductList title={underwearTitle} list={underwearOffer} />} />
+        <Route path="/bags" element={<ProductList title={bagsTitlte} list={bags} />} />
+        <Route path="/underwear" element={<ProductList title={underwearTitle} list={underwear} />} />
+        <Route path="/:product/:productId" element={<Card />} />
       </Routes>
       <Footer />
-    </Fragment>
+    </>
   );
 };
