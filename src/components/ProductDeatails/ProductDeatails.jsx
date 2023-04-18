@@ -41,12 +41,11 @@ export const ProductDeatails = () => {
                     spaceBetween={200}
                     navigation
                     pagination={{ clickable: true }}
-                    onSwiper={(swiper) => console.log(swiper)}
-                    onSlideChange={() => console.log('slide change')}
                   >
                   {
                     productItem.picture.map(imgUrl => <SwiperSlide
-                      key={imgUrl}>
+                      key={imgUrl}
+                    >
                       <img width={500} className={sass.productImage} src={imgUrl} alt="" />
                     </SwiperSlide>)
                   }
