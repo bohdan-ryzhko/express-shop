@@ -4,5 +4,7 @@ export const getProductCard = (product, productId, { underwear, bags }) => {
 			return underwear.find(({ id }) => id === productId);
 		case "bags":
 			return bags.find(({ id }) => id === productId);
+		default:
+			return {};
 	}
 }
