@@ -1,6 +1,6 @@
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import { Card } from './Card/Card';
+import { ProductDeatails } from './ProductDeatails/ProductDeatails';
 
 import underwearData from '../data/underwear';
 import bagsData from "../data/bags";
@@ -19,7 +19,17 @@ const {
   },
 } = underwearData;
 
-const { yml_catalog: { shop: { categories: { category: { bagsTitlte } }, offers: { bags } } } } = bagsData;
+const {
+  yml_catalog: {
+    shop: {
+      categories: {
+        category: { bagsTitlte }
+      }, offers: {
+        bags
+      }
+    }
+  }
+} = bagsData;
 
 export const App = () => {
   return (
@@ -29,7 +39,7 @@ export const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/bags" element={<ProductList title={bagsTitlte} list={bags} />} />
         <Route path="/underwear" element={<ProductList title={underwearTitle} list={underwear} />} />
-        <Route path="/:product/:productId" element={<Card />} />
+        <Route path="/:product/:productId" element={<ProductDeatails />} />
       </Routes>
       <Footer />
     </>

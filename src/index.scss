@@ -1,3 +1,9 @@
 @import-normalize;
 @import './sass/index.scss';
+
+.swiper {
+  max-width: 500px;
+  margin-left: 0;
+  height: 550px;
+}
 /* bring in normalize.css styles */
