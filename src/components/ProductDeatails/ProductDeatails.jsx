@@ -3,12 +3,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import sass from './ProductDeatails.module.scss';
 
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Navigation, Pagination, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useRef } from 'react';
 
-//1791180090
-
+import { BiArrowBack } from 'react-icons/bi';
 import { getProductCard } from 'services/getProductCard';
 
 import underwearData from '../../data/underwear';
@@ -26,11 +26,19 @@ export const ProductDeatails = () => {
   const productItem = getProductCard(product, productId, productCardOptions);
   console.log(productItem);
 
+  const location = useLocation();
+
+  const backLinkRef = useRef(location.state?.from ?? "/");
+  console.log(backLinkRef);
+
   return (
     productItem &&
     <main className={sass.productDetails}>
       <div className="container">
         <section className={sass.productCard}>
+          <Link className={sass.backLink} to={backLinkRef.current}>
+            <BiArrowBack size={30}/>
+          </Link>
           <h2 className={sass.productCardTitle}>{productItem.name_ua}</h2>
             <div className={sass.productCardThumb}>
               {
