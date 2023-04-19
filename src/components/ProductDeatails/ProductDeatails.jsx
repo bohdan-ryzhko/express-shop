@@ -14,6 +14,8 @@ import { getProductCard } from 'services/getProductCard';
 
 import underwearData from '../../data/underwear';
 import bagsData from "../../data/bags";
+import { useDispatch } from 'react-redux';
+import { addProduct } from 'redux/orderReducer';
 const { yml_catalog: { shop: { offers: { underwear } } } } = underwearData;
 const { yml_catalog: { shop: { offers: { bags } } } } = bagsData;
 
@@ -31,6 +33,8 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
 
   const backLinkRef = useRef(location.state?.from ?? "/");
   console.log(backLinkRef.current);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setCurrentPosition(Number(backLinkRef.current.search.split(/[^0-9]/).join("")));
@@ -102,7 +106,7 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
                     <button type="button">+</button>
                   </div>
                 </div>
-                <button type="button">Додати до кошику</button>
+                <button onClick={() => dispatch(addProduct(productItem))} type="button">Додати до кошику</button>
               </div>
             </div>
           </div>
