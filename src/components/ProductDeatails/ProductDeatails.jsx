@@ -3,16 +3,19 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import sass from './ProductDeatails.module.scss';
 
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Navigation, Pagination, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useEffect, useRef } from 'react';
 
-//1791180090
+import { BiArrowBack } from 'react-icons/bi';
 
 import { getProductCard } from 'services/getProductCard';
 
 import underwearData from '../../data/underwear';
 import bagsData from "../../data/bags";
+import { useDispatch } from 'react-redux';
+import { addProduct } from 'redux/orderReducer';
 const { yml_catalog: { shop: { offers: { underwear } } } } = underwearData;
 const { yml_catalog: { shop: { offers: { bags } } } } = bagsData;
 
@@ -21,16 +24,31 @@ const productCardOptions = {
   bags,
 }
 
-export const ProductDeatails = () => {
+export const ProductDeatails = ({ setCurrentPosition }) => {
   const { product, productId } = useParams();
   const productItem = getProductCard(product, productId, productCardOptions);
   console.log(productItem);
+
+  const location = useLocation();
+
+  const backLinkRef = useRef(location.state?.from ?? "/");
+  console.log(backLinkRef.current);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setCurrentPosition(Number(backLinkRef.current.search.split(/[^0-9]/).join("")));
+  }, [setCurrentPosition]);
+
 
   return (
     productItem &&
     <main className={sass.productDetails}>
       <div className="container">
         <section className={sass.productCard}>
+          <Link className={sass.backLink} to={backLinkRef.current}>
+            <BiArrowBack size={30}/>
+          </Link>
           <h2 className={sass.productCardTitle}>{productItem.name_ua}</h2>
             <div className={sass.productCardThumb}>
               {
@@ -41,12 +59,11 @@ export const ProductDeatails = () => {
                     spaceBetween={200}
                     navigation
                     pagination={{ clickable: true }}
-                    onSwiper={(swiper) => console.log(swiper)}
-                    onSlideChange={() => console.log('slide change')}
                   >
                   {
                     productItem.picture.map(imgUrl => <SwiperSlide
-                      key={imgUrl}>
+                      key={imgUrl}
+                    >
                       <img width={500} className={sass.productImage} src={imgUrl} alt="" />
                     </SwiperSlide>)
                   }
@@ -89,7 +106,7 @@ export const ProductDeatails = () => {
                     <button type="button">+</button>
                   </div>
                 </div>
-                <button type="button">Додати до кошику</button>
+                <button onClick={() => dispatch(addProduct(productItem))} type="button">Додати до кошику</button>
               </div>
             </div>
           </div>

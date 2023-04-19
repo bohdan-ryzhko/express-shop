@@ -1,11 +1,55 @@
-@import '../../sass/_variables.scss';
+@import '../../sass/helper';
 
-.basket {
-  text-align: right;
+.basketBackdrop,
+.basketBackdropActive {
+  position: absolute;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  background-color: #00000076;
+  transition: all 500ms ease;
 }
 
-.basket__btn {
+.basketBackdrop {
+  top: -100%;
+}
+
+.basketBackdropActive {
+  top: 0;
+}
+
+.basketBody,
+.basketBodyActive {
+  padding-top: 50px;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  transition: all 400ms ease-in-out;
+  transition-duration: 500ms;
+}
+
+.closeBasketBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  transition: all 600ms ease-in-out;
+
   & > svg {
     fill: $--accent-color;
   }
+
+  &:hover {
+    transform: rotate(180deg);
+  }
 }
+
+// .basketInner {
+// }

@@ -1,7 +1,7 @@
 import sass from "./Product.module.scss";
 import defaultImg from "../../images/placeholder.jpg";
 import { sizeImages } from "constants/sizes";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Product = ({ product: {
 	name_ua,
@@ -12,10 +12,13 @@ export const Product = ({ product: {
 	price
 } }) => {
 
+	const location = useLocation();
+	// console.log(location);
+
 	const { height } = sizeImages;
 	return (
 		<li className={sass.product__item}>
-			<Link to={`${id}`} >
+			<Link state={{ from: location }} to={`${id}`} >
 				<div className={sass.product__itemWrapper}>
 					<div className={sass.product__itemImg}>
 						<div className={sass.product__itemPrice}>

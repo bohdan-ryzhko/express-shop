@@ -1,10 +1,10 @@
 import sass from "./Header.module.scss";
 import { HeaderLogo } from "../HeaderLogo/HeaderLogo";
-import { Basket } from "components/Basket/Basket";
+import { BasketButton } from "components/BasketButton/BasketButton";
 import { NavLink } from 'react-router-dom';
 
 
-export const Header = () => {
+export const Header = ({ setToggleBasket }) => {
 	return (
 		<header className={sass.header}>
 			<div className="container">
@@ -17,7 +17,7 @@ export const Header = () => {
 							<NavLink className={sass.navLink} to="/bags" >Сумки</NavLink>
 							<NavLink className={sass.navLink} to="/underwear" >Чоловіча білизна</NavLink>
 						</nav>
-						<Basket />
+						<BasketButton setToggleBasket={setToggleBasket} />
 					</div>
 				</div>
 			</div>

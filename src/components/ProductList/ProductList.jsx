@@ -1,19 +1,26 @@
 import sass from "./ProductList.module.scss";
 import { Product } from "../Product/Product";
 import { ProductTitle } from "../ProductTitle/ProductTitle";
-import { useState } from "react";
+import { useEffect } from "react";
 import { LoadMoreButton } from "components/LoadMoreButton/LoadMoreButton";
 import { PAGINATION_ITEMS_COUNT } from "constants/paginationItem";
+import { useSearchParams } from "react-router-dom";
 
-export const ProductList = ({ list, title }) => {
-	const [countPosition, setCountPosition] = useState(PAGINATION_ITEMS_COUNT);
+export const ProductList = ({ list, title, currentPosition, setCurrentPosition }) => {
+
+	const [, setSearchParams] = useSearchParams();
+
+	useEffect(() => {
+		setSearchParams({ count: currentPosition });
+		setCurrentPosition(currentPosition);
+	}, [setSearchParams, currentPosition, setCurrentPosition]);
 
 	const handleLoadMore = () => {
-		setCountPosition(prevState => prevState + PAGINATION_ITEMS_COUNT);
+		setCurrentPosition(prevState => prevState + PAGINATION_ITEMS_COUNT);
 	}
 
 	const filteredList = list.filter((product, index) =>
-		index < countPosition ? product : null);
+		index < currentPosition ? product : null);
 
 	return (
 		<main className={sass.main__productPage}>
@@ -29,7 +36,7 @@ export const ProductList = ({ list, title }) => {
 						}
 					</ul>
 					{
-						countPosition < list.length &&
+						currentPosition < list.length &&
 						<div className={sass.pagination}>
 								<LoadMoreButton text="Завантажити ще" handleClick={handleLoadMore} />
 						</div>
