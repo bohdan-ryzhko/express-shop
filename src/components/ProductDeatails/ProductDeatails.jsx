@@ -40,7 +40,6 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
     setCurrentPosition(Number(backLinkRef.current.search.split(/[^0-9]/).join("")));
   }, [setCurrentPosition]);
 
-
   return (
     productItem &&
     <main className={sass.productDetails}>
@@ -70,43 +69,46 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
                   </Swiper>
                   : <img width={500} src={productItem.picture} alt="" />
               }
-                        <div className={sass.productCardDescription}>
-              <p>
-                {productItem.oldprice} {productItem.currencyId}
-              </p>
-              <p>
-                {productItem.price} {productItem.currencyId}
-              </p>
-              {
-                productItem.vendor &&
-                <p>Бренд: {productItem.vendor}</p>
-              }
-              <p>{productItem.description_ua}</p>
-              <div className={sass.productCardSizes}>
+              <div className={sass.productCardDescription}>
                 {
-                  productItem.param[2] &&
-                  <>
-                    <p>Виберіть розмір</p>
-                    {
-                      productItem.param[2].text.split('|').map(el => (
-                        <button type="radio" name="sizes" value={el} key={el}>
-                          {el}
-                        </button>
-                      ))
-                    }
-                  </>
+                  productItem.oldprice && 
+                  <p className={sass.oldPrice}>
+                    {productItem.oldprice} {productItem.currencyId}
+                  </p>
                 }
+                <p className={sass.price}>
+                  {productItem.price} {productItem.currencyId}
+                </p>
+                {
+                  productItem.vendor &&
+                  <p className={sass.brand}>Бренд: {productItem.vendor}</p>
+                }
+                <p className={sass.productDescription}>{productItem.description_ua}</p>
+                <div className={sass.productCardSizes}>
+                  {
+                    productItem.param[2] &&
+                    <>
+                      <p>Виберіть розмір:</p>
+                      {
+                        productItem.param[2].text.split('|').map(el => (
+                          <button type="radio" name="sizes" value={el} key={el}>
+                            {el}
+                          </button>
+                        ))
+                      }
+                    </>
+                  }
               </div>
               <div className={sass.productCardPurchaseOptions}>
                 <div className={sass.productCardQuantityOptions}>
                   <label htmlFor="quantity">Кількість</label>
-                  <div>
-                    <button type="button">-</button>
-                    <input type="text" name="quantity" />
-                    <button type="button">+</button>
+                  <div className={sass.quantityWrapper}>
+                    <button className={sass.decrement} type="button">-</button>
+                    <input className={sass.productQuantity} type="text" name="quantity" />
+                    <button className={sass.increment} type="button">+</button>
                   </div>
                 </div>
-                <button onClick={() => dispatch(addProduct(productItem))} type="button">Додати до кошику</button>
+                <button className={sass.productAdd} onClick={() => dispatch(addProduct(productItem))} type="button">Додати до кошику</button>
               </div>
             </div>
           </div>
