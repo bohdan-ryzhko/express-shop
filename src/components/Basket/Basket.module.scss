@@ -35,16 +35,16 @@
   height: 100vh;
   background-color: #fff;
   overflow-y: scroll;
-  transition: transform 500ms ease-in-out;
+  box-shadow: 0 0 100px #5b5b5b;
+  transition: transform 600ms ease-in-out;
   transition-delay: 600ms;
 }
 
 .basketBody {
-  transform: translateX(100%);
+  transform: translateX(120%);
 }
 
 .basketBodyActive {
-  box-shadow: 0 0 100px #5b5b5b;
   transform: translateX(0);
 }
 
