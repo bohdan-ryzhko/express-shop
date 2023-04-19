@@ -6,6 +6,7 @@
 
 .basket__btn {
   position: relative;
+  margin-right: 10px;
   & > svg {
     fill: $--accent-color;
   }
@@ -13,8 +14,8 @@
 
 .countProducts {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -10px;
+  right: -10px;
   font-size: 16px;
   font-weight: 700;
 }

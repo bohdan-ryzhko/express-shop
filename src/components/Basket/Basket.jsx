@@ -1,19 +1,19 @@
 import sass from "./Basket.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { MdClose } from 'react-icons/md';
-import { BsFillTrash3Fill } from 'react-icons/bs';
-import { removeProduct } from "redux/orderReducer";
+import { BasketProduct } from "components/BasketProduct/BasketProduct";
 
 export const Basket = ({ setToggleBasket, toggleBasket }) => {
 
-	const dispatch = useDispatch();
-
 	const orderList = useSelector(state => state.orderList);
-	console.log(orderList);
+	console.log(orderList)
+
+	const totalPrice = orderList.reduce((total, { price }) => total += Number(price), 0);
 
 	return (
-		<div className={toggleBasket ? sass.basketBackdropActive : sass.basketBackdrop}>
-			<div className={sass.basketBody}>
+		<>
+			<div onClick={() => setToggleBasket(prev => !prev)} className={toggleBasket ? sass.basketBackdropActive : sass.basketBackdrop}></div>
+			<div className={toggleBasket ? sass.basketBodyActive : sass.basketBody}>
 				<button
 					onClick={() => setToggleBasket(prev => !prev)}
 					className={sass.closeBasketBtn}
@@ -21,25 +21,21 @@ export const Basket = ({ setToggleBasket, toggleBasket }) => {
 					<MdClose size={25}/>
 				</button>
 				<div className={sass.basketInner}>
-					<h3>Кошик</h3>
-					<ul className="orderList">
+					<h3 className={sass.basketTitlte}>Кошик</h3>
+					<ul className={sass.orderList}>
 						{
 							orderList.length < 1
-								? "Ваш кошик пустий"
+								? <p style={{ fontSize: 20 }}>Ваш кошик пустий</p>
 								: <>
 									{
-										orderList.map(product => <li key={product.id}>
-											<p>{product.name}</p>
-											<button onClick={() => dispatch(removeProduct(product.id))}>
-												<BsFillTrash3Fill />
-											</button>
-										</li>)
+										orderList.map(product => <BasketProduct product={product} key={product.id} />)
 									}
 								</>
 						}
 					</ul>
+					<p className={sass.totalPrice}>Всього: {totalPrice}</p>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
