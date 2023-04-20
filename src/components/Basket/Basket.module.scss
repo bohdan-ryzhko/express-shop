@@ -65,6 +65,9 @@
     transform: rotate(180deg);
   }
 }
+.basketInner {
+  margin-bottom: 20px;
+}
 
 .basketTitlte {
   text-align: center;
@@ -78,4 +81,19 @@
   border-bottom: 1px solid #000;
   padding-bottom: 10px;
   margin-bottom: 20px;
+}
+
+.makeOrderLink {
+  display: block;
+  width: 100%;
+  background-color: $--accent-color;
+  color: #fff;
+  padding: 15px 0;
+  border-radius: 7px;
+  text-align: center;
+  transition: all 300ms ease;
+
+  &:hover {
+    background-color: $--hover-color;
+  }
 }

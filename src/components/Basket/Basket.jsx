@@ -2,6 +2,7 @@ import sass from "./Basket.module.scss";
 import { useSelector } from "react-redux";
 import { MdClose } from 'react-icons/md';
 import { BasketProduct } from "components/BasketProduct/BasketProduct";
+import { Link } from "react-router-dom";
 
 export const Basket = ({ setToggleBasket, toggleBasket }) => {
 
@@ -35,6 +36,10 @@ export const Basket = ({ setToggleBasket, toggleBasket }) => {
 					</ul>
 					<p className={sass.totalPrice}>Всього: {totalPrice}</p>
 				</div>
+				{
+					orderList.length > 0 &&
+					<Link onClick={() => setToggleBasket(prev => !prev)} className={sass.makeOrderLink} to="order-page">Оформити замовлення</Link>
+				}
 			</div>
 		</>
 	)

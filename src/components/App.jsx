@@ -11,6 +11,7 @@ import { Basket } from './Basket/Basket';
 import { useState } from 'react';
 
 import { PAGINATION_ITEMS_COUNT } from 'constants/paginationItem';
+import { OrderPage } from 'pages/OrderPage/OrderPage';
 
 const {
   yml_catalog: {
@@ -59,6 +60,7 @@ export const App = () => {
           list={underwear}
         />} />
         <Route path="/:product/:productId" element={<ProductDeatails setCurrentPosition={setCurrentPosition} />} />
+        <Route path="order-page" element={<OrderPage />} />
       </Routes>
       <Footer />
     </>
