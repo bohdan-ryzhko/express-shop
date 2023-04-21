@@ -10,7 +10,7 @@ import underwearData from '../data/underwear';
 import bagsData from "../data/bags";
 import { ProductList } from './ProductList/ProductList';
 import { Routes, Route } from 'react-router-dom';
-import { Home } from './Home/Home';
+import { Home } from '../pages/Home/Home';
 import { Basket } from './Basket/Basket';
 import { useEffect, useState } from 'react';
 
