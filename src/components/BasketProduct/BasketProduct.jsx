@@ -3,9 +3,16 @@ import { useDispatch } from "react-redux";
 import { removeProduct } from "redux/orderReducer";
 import { TfiTrash } from 'react-icons/tfi';
 
+import { removeLocalProduct } from "services/setLocalStorage";
+
 export const BasketProduct = ({ product: { picture, name_ua, price, currencyId, id } }) => {
 
 	const dispatch = useDispatch();
+
+	const handleRemoveProduct = () => {
+		removeLocalProduct(id);
+		dispatch(removeProduct(id))
+	}
 
 	return (
 		<li className={sass.productItem}>
@@ -14,7 +21,7 @@ export const BasketProduct = ({ product: { picture, name_ua, price, currencyId, 
 					<img width={50} src={Array.isArray(picture) ? picture[0] : picture} alt="" />
 				</div>
 				<p className={sass.productName}>{name_ua}</p>
-				<button className={sass.removeBtn} onClick={() => dispatch(removeProduct(id))}>
+				<button className={sass.removeBtn} onClick={handleRemoveProduct}>
 					<TfiTrash size={20} />
 				</button>
 			</div>

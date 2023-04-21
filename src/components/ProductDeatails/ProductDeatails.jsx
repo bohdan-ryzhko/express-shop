@@ -16,6 +16,7 @@ import underwearData from '../../data/underwear';
 import bagsData from "../../data/bags";
 import { useDispatch } from 'react-redux';
 import { addProduct } from 'redux/orderReducer';
+import { setOrderToLocal } from 'services/setLocalStorage';
 const { yml_catalog: { shop: { offers: { underwear } } } } = underwearData;
 const { yml_catalog: { shop: { offers: { bags } } } } = bagsData;
 
@@ -25,20 +26,21 @@ const productCardOptions = {
 }
 
 export const ProductDeatails = ({ setCurrentPosition }) => {
+  const dispatch = useDispatch();
   const { product, productId } = useParams();
   const productItem = getProductCard(product, productId, productCardOptions);
-  console.log(productItem);
 
   const location = useLocation();
-
   const backLinkRef = useRef(location.state?.from ?? "/");
-  console.log(backLinkRef.current);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     setCurrentPosition(Number(backLinkRef.current.search.split(/[^0-9]/).join("")));
   }, [setCurrentPosition]);
+
+  const addToBasket = () => {
+    setOrderToLocal(productItem);
+    dispatch(addProduct(productItem));
+  }
 
   return (
     productItem &&
@@ -108,7 +110,7 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
                     <button className={sass.increment} type="button">+</button>
                   </div>
                 </div>
-                <button className={sass.productAdd} onClick={() => dispatch(addProduct(productItem))} type="button">Додати до кошику</button>
+                <button className={sass.productAdd} onClick={addToBasket} type="button">Додати до кошику</button>
               </div>
             </div>
           </div>

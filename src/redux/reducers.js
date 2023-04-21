@@ -9,3 +9,7 @@ export const handleAddProduct = (state, { payload }) => {
 }
 
 export const handleRemoveProduct = (state, { payload }) => state.filter(({ id }) => id !== payload);
+
+export const handleAddProductToLocalSorage = (state, action) => {
+	return [...state, ...action.payload];
+}

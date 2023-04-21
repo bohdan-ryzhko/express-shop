@@ -7,11 +7,11 @@ import { Provider } from 'react-redux';
 import { store } from 'redux/store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter basename="/express-shop">
       <Provider store={store}>
         <App />
       </Provider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
