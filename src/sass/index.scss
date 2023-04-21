@@ -52,13 +52,6 @@ button {
   height: 550px;
 }
 
-// .swiper-button-next,
-// .swiper-button-prev {
-//   height: 100%;
-//   top: 0;
-//   background-color: #363636;
-// }
-
 .swiper-button-next:after,
 .swiper-button-prev:after {
   color: $--accent-color;
@@ -67,4 +60,8 @@ button {
 .swiper-pagination-bullet,
 .swiper-pagination-bullet-active {
   background-color: $--accent-color;
+}
+
+#react-select-3-listbox {
+  min-width: 300px;
 }

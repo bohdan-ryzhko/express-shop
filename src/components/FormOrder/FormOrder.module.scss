@@ -1,0 +1,37 @@
+.orderForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  & > label > input {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    padding: 0 10px;
+  }
+}
+
+.selectPhone {
+  display: flex;
+
+  & > label {
+    width: 100%;
+  }
+}
+
+.inputPhone {
+  min-width: 100%;
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  padding: 0 10px;
+}
+
+.formComment {
+  resize: none;
+  height: 70px;
+}
+
+.selectPhone {
+}
