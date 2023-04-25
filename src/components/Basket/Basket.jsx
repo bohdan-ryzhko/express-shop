@@ -33,7 +33,7 @@ export const Basket = ({ setToggleBasket, toggleBasket }) => {
 								</>
 						}
 					</ul>
-					<p className={sass.totalPrice}>Всього: {totalPrice}</p>
+					<p className={sass.totalPrice}>Всього: {totalPrice} {orderList[0]?.currencyId}</p>
 				</div>
 				{
 					orderList.length > 0 &&

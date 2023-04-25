@@ -19,7 +19,8 @@ export const FormOrder = () => {
 					if (!data) {
 						return Promise.reject(data);
 					}
-					setCodeValue(data.data[0].idd.root + data.data[0].idd.suffixes)
+					
+					setCodeValue(data.data[0].idd.root + data.data[0].idd.suffixes[0])
 				})
 				.catch(error => console.log(error));
 		}
@@ -32,6 +33,7 @@ export const FormOrder = () => {
 					return Promise.reject(data);
 				}
 				setCountries(data.data);
+				console.log(data);
 			})
 			.catch(error => console.log(error));
 	}, []);

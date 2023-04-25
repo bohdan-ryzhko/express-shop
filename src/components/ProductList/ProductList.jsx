@@ -11,6 +11,27 @@ export const ProductList = ({ list, title, currentPosition, setCurrentPosition }
 	const [, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
+		fetch("https://data.mongodb-api.com/app/data-rhpzc/endpoint/data/v1/action/find", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"api-key": "hufmgLx1hZ6eeIDooeLv1BUw335V4J01cAeuDXFqbOEM7izT8SlNPaj6QmZXr7lZ"
+			},
+			body: {
+				"dataSource": "Cluster0",
+				"database": "test",
+				"collection": "posts"
+			}
+		}).then(data => {
+				if (!data.ok) {
+					throw new Error(data)
+				}
+				console.log(data)
+			})
+			.catch(error => console.log(error));
+	}, [])
+
+	useEffect(() => {
 		setSearchParams({ count: currentPosition });
 		setCurrentPosition(currentPosition);
 	}, [setSearchParams, currentPosition, setCurrentPosition]);

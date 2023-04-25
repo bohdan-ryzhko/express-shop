@@ -13,6 +13,7 @@
 .orderWrapper {
   @include desktop {
     display: flex;
+    gap: 30px;
   }
 }
 
