@@ -1,69 +1,140 @@
 import sass from "./ProductList.module.scss";
 import { Product } from "../Product/Product";
 import { ProductTitle } from "../ProductTitle/ProductTitle";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LoadMoreButton } from "components/LoadMoreButton/LoadMoreButton";
-import { PAGINATION_ITEMS_COUNT } from "constants/paginationItem";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
-export const ProductList = ({ list, title, currentPosition, setCurrentPosition }) => {
+import { fetchProduct } from "services/fetchProduct";
+import { Skeleton } from "@mui/material";
+
+export const ProductList = ({ title }) => {
+	const [productList, setProductList] = useState([]);
+	const [limit, setLimit] = useState(12);
+	const [isLoad, setIsLoad] = useState(false);
+	const [totalProducts, setTotalProducts] = useState(0);
 
 	const [, setSearchParams] = useSearchParams();
+	const location = useLocation();
 
+	
 	useEffect(() => {
-		fetch("https://data.mongodb-api.com/app/data-rhpzc/endpoint/data/v1/action/find", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"api-key": "hufmgLx1hZ6eeIDooeLv1BUw335V4J01cAeuDXFqbOEM7izT8SlNPaj6QmZXr7lZ"
-			},
-			body: {
-				"dataSource": "Cluster0",
-				"database": "test",
-				"collection": "posts"
-			}
-		}).then(data => {
-				if (!data.ok) {
-					throw new Error(data)
-				}
-				console.log(data)
-			})
-			.catch(error => console.log(error));
-	}, [])
+		if (location.pathname === "/underwears") {
+			setIsLoad(true)
+			fetchProduct("underwears", limit)
+				.then(data => {
+					if (data.status !== 200) return Promise.reject(data);
+					setProductList(data.data.products);
+					setTotalProducts(data.data.count)
+					console.log(data);
+					setIsLoad(false)
+				})
+				.catch(error => {
+					console.log(error)
+					setIsLoad(false)
+				});
+		}
 
-	useEffect(() => {
-		setSearchParams({ count: currentPosition });
-		setCurrentPosition(currentPosition);
-	}, [setSearchParams, currentPosition, setCurrentPosition]);
+		if (location.pathname === "/bags") {
+			setIsLoad(true)
+			fetchProduct("bags", limit)
+				.then(data => {
+					if (data.status !== 200) return Promise.reject(data);
+					setProductList(data.data.products);
+					setTotalProducts(data.data.count)
+					console.log(data);
+					setIsLoad(false)
+				})
+				.catch(error => {
+					console.log(error)
+					setIsLoad(false)
+				});
+		}
+	}, [limit, location.pathname]);
+
+	// useEffect(() => {
+	// 	setSearchParams({ count: currentPosition });
+	// 	setCurrentPosition(currentPosition);
+	// }, [setSearchParams, currentPosition, setCurrentPosition]);
 
 	const handleLoadMore = () => {
-		setCurrentPosition(prevState => prevState + PAGINATION_ITEMS_COUNT);
+		setLimit(prevState => prevState + 12);
 	}
 
-	const filteredList = list.filter((product, index) =>
-		index < currentPosition ? product : null);
-
 	return (
-		<main className={sass.main__productPage}>
-			<div className="container">
-				<div className={sass.product__listInner}>
-					<span className={sass.quantityPosition}>Кількість позицій: {list.length}</span>
-					<ProductTitle title={title} />
-					<ul className={sass.product__list}>
-						{
-							filteredList.map(product =>
-								<Product product={product} key={product.id} />
-							)
-						}
-					</ul>
-					{
-						currentPosition < list.length &&
-						<div className={sass.pagination}>
-								<LoadMoreButton text="Завантажити ще" handleClick={handleLoadMore} />
+		<>
+			{
+				(isLoad && limit <= 12) &&
+				<>
+					<div className="container">
+						<div className={sass.loaderWrapper}>
+							<div className={sass.loaderItem}>
+								<Skeleton variant="rounded" sx={{ height: 350 }} />
+								<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+							</div>
+							<div className={sass.loaderItem}>
+								<Skeleton variant="rounded" sx={{ height: 350 }} />
+								<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+							</div>
+							<div className={sass.loaderItem}>
+								<Skeleton variant="rounded" sx={{ height: 350 }} />
+								<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+							</div>
+							<div className={sass.loaderItem}>
+								<Skeleton variant="rounded" sx={{ height: 350 }} />
+								<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+							</div>
 						</div>
-					}
+					</div>
+				</>
+			}
+			<main className={sass.main__productPage}>
+				<div className="container">
+					<div className={sass.product__listInner}>
+						<span className={sass.quantityPosition}>Кількість позицій: {totalProducts}</span>
+						<ProductTitle title={title} />
+						<ul className={sass.product__list}>
+							{
+								productList.length > 0 &&
+								productList.map(product =>
+									<Product product={product} key={product.id} />
+								)
+							}
+						</ul>
+						{
+							isLoad &&
+							<>
+								<div className="container">
+									<div className={sass.loaderWrapper}>
+										<div className={sass.loaderItem}>
+											<Skeleton variant="rounded" sx={{ height: 350 }} />
+											<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+										</div>
+										<div className={sass.loaderItem}>
+											<Skeleton variant="rounded" sx={{ height: 350 }} />
+											<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+										</div>
+										<div className={sass.loaderItem}>
+											<Skeleton variant="rounded" sx={{ height: 350 }} />
+											<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+										</div>
+										<div className={sass.loaderItem}>
+											<Skeleton variant="rounded" sx={{ height: 350 }} />
+											<Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+										</div>
+									</div>
+								</div>
+							</>
+						}
+						{
+							limit < totalProducts &&
+							<div className={sass.pagination}>
+								<LoadMoreButton text="Завантажити ще" handleClick={handleLoadMore} />
+							</div>
+						}
+					</div>
 				</div>
-			</div>
-		</main>
+			</main>
+		</>
 	)
 }

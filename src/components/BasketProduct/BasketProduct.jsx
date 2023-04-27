@@ -3,14 +3,10 @@ import { useDispatch } from "react-redux";
 import { removeProduct } from "redux/orderReducer";
 import { TfiTrash } from 'react-icons/tfi';
 
-import { removeLocalProduct } from "services/setLocalStorage";
-
-export const BasketProduct = ({ product: { picture, name_ua, price, currencyId, id } }) => {
-
+export const BasketProduct = ({ product: { picture, quantityProduct, name_ua, price, currencyId, id } }) => {
 	const dispatch = useDispatch();
 
 	const handleRemoveProduct = () => {
-		removeLocalProduct(id);
 		dispatch(removeProduct(id))
 	}
 
@@ -25,6 +21,7 @@ export const BasketProduct = ({ product: { picture, name_ua, price, currencyId, 
 					<TfiTrash size={20} />
 				</button>
 			</div>
+			<p className={sass.productQuantity}>Кількість: {quantityProduct}</p>
 			<p>{price} {currencyId}</p>
 		</li>
 	)

@@ -12,6 +12,19 @@ export const SelectCode = ({ countries = [], setSelectedCode, selectedCode }) =>
 		<>
 			<Select
 				className={sass.select}
+				styles={{
+					control: (baseStyles, state) => ({
+						...baseStyles,
+						width: 140,
+						borderColor: state.isFocused ? "#454545" : "#cccccc",
+						boxShadow: state.isSelected ? "#454545" : "#cccccc",
+						outline: state.isFocused ? "#454545" : "#cccccc",
+						borderTopLeftRadius: 10,
+						borderTopRightRadius: 0,
+						borderBottomRightRadius: 0,
+						borderBottomLeftRadius: 10,
+					})
+				}}
 				options={options}
 				value={selectedCode}
 				onChange={setSelectedCode}

@@ -1,13 +1,26 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { Notify } from "notiflix";
 
-import { handleAddProduct, handleRemoveProduct, handleAddProductToLocalSorage } from "./reducers";
+export const orderSlice = createSlice({
+	name: "basketOrders",
+	initialState: {
+		orderList: [],
+	},
+	reducers: {
+		addProduct({ orderList }, { payload }) {
+			const repeatOrder = orderList.some(product => product.id === payload.id);
 
-export const addProduct = createAction("basketOrders/addProduct");
-export const removeProduct = createAction("basketOrders/removeProduct");
-export const addProductToLocalSorage = createAction("basketOrders/addProductToLocalSorage");
+			if (repeatOrder) return Notify.failure(`${payload.name_ua} вже є у кошику`);
 
-export const orderReducer = createReducer([], {
-	[addProduct]: handleAddProduct,
-	[removeProduct]: handleRemoveProduct,
-	[addProductToLocalSorage]: handleAddProductToLocalSorage,
+			Notify.success(`${payload.name_ua} додан до кошику`);
+			orderList.push(payload);
+		},
+		removeProduct({ orderList }, { payload }) {
+			const removedIndex = orderList.findIndex(order => order.id === payload);
+			orderList.splice(removedIndex, 1);
+		},
+	}
 });
+
+export const { addProduct, removeProduct } = orderSlice.actions;
+export default orderSlice.reducer;

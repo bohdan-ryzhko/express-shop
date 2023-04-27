@@ -5,9 +5,7 @@ import { BasketProduct } from "components/BasketProduct/BasketProduct";
 import { Link } from "react-router-dom";
 
 export const Basket = ({ setToggleBasket, toggleBasket }) => {
-
-	const orderList = useSelector(state => state.orderList);
-
+	const orderList = useSelector(state => state.orderList.orderList);
 	const totalPrice = orderList.reduce((total, { price }) => total += Number(price), 0);
 
 	return (

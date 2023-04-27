@@ -2,33 +2,41 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import sass from './ProductDeatails.module.scss';
+import Skeleton from '@mui/material/Skeleton';
 
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Navigation, Pagination, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { BiArrowBack } from 'react-icons/bi';
 
-import { getProductCard } from 'services/getProductCard';
-
-import underwearData from '../../data/underwear';
-import bagsData from "../../data/bags";
 import { useDispatch } from 'react-redux';
 import { addProduct } from 'redux/orderReducer';
-import { setOrderToLocal } from 'services/setLocalStorage';
-const { yml_catalog: { shop: { offers: { underwear } } } } = underwearData;
-const { yml_catalog: { shop: { offers: { bags } } } } = bagsData;
 
-const productCardOptions = {
-  underwear,
-  bags,
-}
+import { fetchProductDetails } from 'services/fetchProductDetails';
 
 export const ProductDeatails = ({ setCurrentPosition }) => {
   const dispatch = useDispatch();
   const { product, productId } = useParams();
-  const productItem = getProductCard(product, productId, productCardOptions);
+  const [productItem, setProductItem] = useState(null);
+  const [quantityProduct, setQuantityProduct] = useState(1);
+  const [isLoad, setIsLoad] = useState(false);
+
+  useEffect(() => {
+    setIsLoad(true);
+    fetchProductDetails(product, productId)
+      .then(data => {
+        if (data.status !== 200) return Promise.reject(data);
+        setProductItem(data.data);
+        console.log(data)
+        setIsLoad(false);
+      })
+      .catch(error => {
+        console.log(error)
+        setIsLoad(false);
+      });
+  }, [product, productId]);
 
   const location = useLocation();
   const backLinkRef = useRef(location.state?.from ?? "/");
@@ -38,84 +46,130 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
   }, [setCurrentPosition]);
 
   const addToBasket = () => {
-    setOrderToLocal(productItem);
-    dispatch(addProduct(productItem));
+    dispatch(addProduct({
+      ...productItem,
+      price: productItem.price * quantityProduct,
+      quantityProduct
+    }));
+  }
+
+  const changeQuantityProduct = value => ({ target }) => {
+    if (quantityProduct === 1 && target.name === "decrement") {
+      return;
+    }
+    setQuantityProduct(prev => prev + value);
   }
 
   return (
-    productItem &&
-    <main className={sass.productDetails}>
+  <>
+    {
+      isLoad &&
       <div className="container">
-        <section className={sass.productCard}>
-          <Link className={sass.backLink} to={backLinkRef.current}>
-            <BiArrowBack size={30}/>
-          </Link>
-          <h2 className={sass.productCardTitle}>{productItem.name_ua}</h2>
-            <div className={sass.productCardThumb}>
-              {
-                Array.isArray(productItem.picture)
-                  ? <Swiper
-                    modules={[Navigation, Pagination, A11y]}
-                    slidesPerView={1}
-                    spaceBetween={200}
-                    navigation
-                    pagination={{ clickable: true }}
-                  >
-                  {
-                    productItem.picture.map(imgUrl => <SwiperSlide
-                      key={imgUrl}
+        <Skeleton variant="text" sx={{ fontSize: '2rem', width: "80%", margin: "0 auto" }} />
+        <div className={sass.loaderContent}>
+              <Skeleton variant="rounded" className={sass.loadImg} sx={{
+                width: 500,
+                height: 500
+              }} />
+          <div>
+            <Skeleton variant="text" sx={{ fontSize: '1rem', width: 200 }} />
+            <Skeleton variant="text" sx={{ fontSize: '1rem', width: "100%" }} />
+          </div>
+        </div>
+      </div>
+    }
+    {
+      productItem &&
+      <main className={sass.productDetails}>
+          <div className="container">
+          <section className={sass.productCard}>
+            <Link className={sass.backLink} to={backLinkRef.current}>
+              <BiArrowBack size={30}/>
+            </Link>
+            <h2 className={sass.productCardTitle}>{productItem.name_ua}</h2>
+              <div className={sass.productCardThumb}>
+                {
+                  Array.isArray(productItem.picture)
+                    ? <Swiper
+                      modules={[Navigation, Pagination, A11y]}
+                      slidesPerView={1}
+                      spaceBetween={200}
+                      navigation
+                      pagination={{ clickable: true }}
                     >
-                      <img width={500} className={sass.productImage} src={imgUrl} alt="" />
-                    </SwiperSlide>)
-                  }
-                  </Swiper>
-                  : <img width={500} src={productItem.picture} alt="" />
-              }
-              <div className={sass.productCardDescription}>
-                {
-                  productItem.oldprice && 
-                  <p className={sass.oldPrice}>
-                    {productItem.oldprice} {productItem.currencyId}
-                  </p>
+                    {
+                      productItem.picture.map(imgUrl => <SwiperSlide
+                        key={imgUrl}
+                      >
+                        <img width={500} className={sass.productImage} src={imgUrl} alt="" />
+                      </SwiperSlide>)
+                    }
+                    </Swiper>
+                    : <img width={500} src={productItem.picture} alt="" />
                 }
-                <p className={sass.price}>
-                  {productItem.price} {productItem.currencyId}
-                </p>
-                {
-                  productItem.vendor &&
-                  <p className={sass.brand}>Бренд: {productItem.vendor}</p>
-                }
-                <p className={sass.productDescription}>{productItem.description_ua}</p>
-                <div className={sass.productCardSizes}>
+                <div className={sass.productCardDescription}>
                   {
-                    productItem.param[2] &&
-                    <>
-                      <p>Виберіть розмір:</p>
-                      {
-                        productItem.param[2].text.split('|').map(el => (
-                          <button type="radio" name="sizes" value={el} key={el}>
-                            {el}
-                          </button>
-                        ))
-                      }
-                    </>
+                    productItem.oldprice && 
+                    <p className={sass.oldPrice}>
+                      {productItem.oldprice} {productItem.currencyId}
+                    </p>
                   }
-              </div>
-              <div className={sass.productCardPurchaseOptions}>
-                <div className={sass.productCardQuantityOptions}>
-                  <label htmlFor="quantity">Кількість</label>
-                  <div className={sass.quantityWrapper}>
-                    <button className={sass.decrement} type="button">-</button>
-                    <input className={sass.productQuantity} type="text" name="quantity" />
-                    <button className={sass.increment} type="button">+</button>
-                  </div>
+                  <p className={sass.price}>
+                    {productItem.price} {productItem.currencyId}
+                  </p>
+                  {
+                    productItem.vendor &&
+                    <p className={sass.brand}>Бренд: {productItem.vendor}</p>
+                  }
+                  <p className={sass.productDescription}>{productItem.description_ua}</p>
+                  <div className={sass.productCardSizes}>
+                    {
+                      productItem.param[2] &&
+                      <>
+                        <p>Виберіть розмір:</p>
+                        {
+                          productItem.param[2].text.split('|').map(el => (
+                            <button type="radio" name="sizes" value={el} key={el}>
+                              {el}
+                            </button>
+                          ))
+                        }
+                      </>
+                    }
                 </div>
-                <button className={sass.productAdd} onClick={addToBasket} type="button">Додати до кошику</button>
+                <div className={sass.productCardPurchaseOptions}>
+                  <div className={sass.productCardQuantityOptions}>
+                    <label htmlFor="quantity">Кількість</label>
+                    <div className={sass.quantityWrapper}>
+                      <button
+                        name="decrement"
+                        onClick={changeQuantityProduct(-1)}
+                        className={sass.decrement}
+                        type="button"
+                      >-</button>
+                      <p className={sass.productQuantity}>{quantityProduct}</p>
+                      {/* <input
+                        className={sass.productQuantity}
+                        type="text"
+                        onChange={event => console.log(event.target.value)}
+                        name="quantity"
+                        value={quantityProduct} /> */}
+                        <button
+                          name="increment"
+                          onClick={changeQuantityProduct(1)}
+                          className={sass.increment}
+                          type="button"
+                        >+</button>
+                    </div>
+                  </div>
+                  <button className={sass.productAdd} onClick={addToBasket} type="button">Додати до кошику</button>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
-    </main>
+          </section>
+        </div>
+      </main>
+      }
+    </>
   )
 }

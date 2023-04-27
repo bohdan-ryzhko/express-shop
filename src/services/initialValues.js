@@ -1,13 +1,13 @@
 export const initialValues = Object.freeze({
 	name: "",
-	lastName: "",
-	middleName: "",
-	phone: "",
+	last_name: "",
+	surname: "",
+	phone_number: "",
 	email: "",
 	country: "",
 	state: "",
 	city: "",
-	address: "",
-	postIndex: "",
+	street: "",
+	post_index: "",
 	comment: "",
 });

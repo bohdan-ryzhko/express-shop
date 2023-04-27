@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export const BasketButton = ({ setToggleBasket }) => {
 
-	const orderList = useSelector(state => state.orderList);
+	const orderList = useSelector(state => state.orderList.orderList);
 
 	return (
 		<div className={sass.basket}>

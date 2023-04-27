@@ -1,11 +1,9 @@
-import { OrderListItem } from "components/OrderListItem/OrderListItem";
 import sass from "./OrderInfo.module.scss";
+import { OrderListItem } from "components/OrderListItem/OrderListItem";
 import { useSelector } from "react-redux";
 
 export const OrderInfo = () => {
-	const listOrder = useSelector(state => state.orderList)
-
-	console.log(listOrder);
+	const listOrder = useSelector(state => state.orderList.orderList)
 
 	return (
 		<ul className={sass.orderList}>
