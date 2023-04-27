@@ -5,11 +5,11 @@ export const OrderListItem = ({ product: { picture, name_ua, quantityProduct } }
 		<li className={sass.productItem}>
 			{
 				Array.isArray(picture)
-					? <img width={70} src={picture[0]} alt={name_ua} />
-					: <img src={picture} alt={name_ua} />
+					? <img className={sass.avatar} width={70} src={picture[0]} alt={name_ua} />
+					: <img className={sass.avatar} src={picture} alt={name_ua} />
 			}
-			<h4>{name_ua}</h4>
-			<p>Кількість: {quantityProduct}</p>
+			<p className={sass.name} >{name_ua}</p>
+			<p className={sass.quantity} >Кількість: {quantityProduct}</p>
 		</li>
 	)
 }
