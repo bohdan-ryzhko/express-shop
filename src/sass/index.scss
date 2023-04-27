@@ -57,9 +57,19 @@ button {
   color: $--accent-color;
 }
 
-.swiper-pagination-bullet,
+.swiper-pagination-bullet {
+  background-color: #cc0033 !important;
+  transition: all 300ms ease;
+  width: 13px !important;
+  height: 13px !important;
+}
+
 .swiper-pagination-bullet-active {
-  background-color: $--accent-color;
+  --swiper-theme-color: #cc0033;
+  display: inline-block;
+  width: 40px !important;
+  border-radius: 40px !important;
+  transition: all 300ms ease;
 }
 
 .css-1nmdiq5-menu {
