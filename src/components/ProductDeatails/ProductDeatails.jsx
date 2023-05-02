@@ -11,8 +11,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { BiArrowBack } from 'react-icons/bi';
 
-import { useDispatch } from 'react-redux';
-import { addProduct } from 'redux/orderReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, changeQuantityProduct } from 'redux/orderReducer';
 
 import { fetchProductDetails } from 'services/fetchProductDetails';
 
@@ -22,6 +22,9 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
   const [productItem, setProductItem] = useState(null);
   const [quantityProduct, setQuantityProduct] = useState(1);
   const [isLoad, setIsLoad] = useState(false);
+
+  const { orderList } = useSelector(state => state.orderList);
+  const currentProduct = orderList.find(product => product._id === productId);
 
   useEffect(() => {
     setIsLoad(true);
@@ -48,16 +51,18 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
   const addToBasket = () => {
     dispatch(addProduct({
       ...productItem,
-      price: productItem.price * quantityProduct,
+      count_price: productItem.price * quantityProduct,
       quantityProduct
     }));
   }
 
-  const changeQuantityProduct = value => ({ target }) => {
-    if (quantityProduct === 1 && target.name === "decrement") {
-      return;
+  const changeQuantity = value => ({ target }) => {
+    if (currentProduct === undefined) {
+      if (quantityProduct === 1 && target.name === "decrement") return;
+      return setQuantityProduct(prev => prev + value);
     }
-    setQuantityProduct(prev => prev + value);
+
+    dispatch(changeQuantityProduct({ id: productId, value, target: target.name }));
   }
 
   return (
@@ -143,20 +148,20 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
                     <div className={sass.quantityWrapper}>
                       <button
                         name="decrement"
-                        onClick={changeQuantityProduct(-1)}
+                        onClick={changeQuantity(-1)}
                         className={sass.decrement}
                         type="button"
                       >-</button>
-                      <p className={sass.productQuantity}>{quantityProduct}</p>
-                      {/* <input
-                        className={sass.productQuantity}
-                        type="text"
-                        onChange={event => console.log(event.target.value)}
-                        name="quantity"
-                        value={quantityProduct} /> */}
+                          <p className={sass.productQuantity}>
+                            {
+                              currentProduct === undefined
+                                ? quantityProduct
+                                : currentProduct.quantityProduct
+                            }
+                          </p>
                         <button
                           name="increment"
-                          onClick={changeQuantityProduct(1)}
+                          onClick={changeQuantity(1)}
                           className={sass.increment}
                           type="button"
                         >+</button>

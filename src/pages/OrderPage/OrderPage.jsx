@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export const OrderPage = () => {
 	const orderList = useSelector(state => state.orderList.orderList);
-	const totalPrice = orderList.reduce((total, { price }) => total += Number(price), 0);
+	const totalPrice = orderList.reduce((total, { count_price }) => total += Number(count_price), 0);
 
 	return (
 		<section className={sass.orderPage}>

@@ -4,9 +4,9 @@ import { MdClose } from 'react-icons/md';
 import { BasketProduct } from "components/BasketProduct/BasketProduct";
 import { Link } from "react-router-dom";
 
-export const Basket = ({ setToggleBasket, toggleBasket }) => {
+export const Basket = ({ setToggleBasket, toggleBasket, quantityProduct, setQuantityProduct }) => {
 	const orderList = useSelector(state => state.orderList.orderList);
-	const totalPrice = orderList.reduce((total, { price }) => total += Number(price), 0);
+	const totalPrice = orderList.reduce((total, { count_price }) => total += Number(count_price), 0);
 
 	return (
 		<>
@@ -26,7 +26,12 @@ export const Basket = ({ setToggleBasket, toggleBasket }) => {
 								? <p style={{ fontSize: 20 }}>Ваш кошик пустий</p>
 								: <>
 									{
-										orderList.map(product => <BasketProduct product={product} key={product.id} />)
+										orderList.map(product => <BasketProduct
+											setQuantityProduct={setQuantityProduct}
+											quantityProduct={quantityProduct}
+											product={product}
+											key={product.id}
+										/>)
 									}
 								</>
 						}

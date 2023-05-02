@@ -15,17 +15,20 @@ import { OrderPage } from 'pages/OrderPage/OrderPage';
 export const App = () => {
 
   const [toggleBasket, setToggleBasket] = useState(false);
-  const [currentPosition, setCurrentPosition] = useState(PAGINATION_ITEMS_COUNT);
+  const [, setCurrentPosition] = useState(PAGINATION_ITEMS_COUNT);
 
   return (
     <>
-      <Basket toggleBasket={toggleBasket} setToggleBasket={setToggleBasket} />
+      <Basket
+        toggleBasket={toggleBasket}
+        setToggleBasket={setToggleBasket}
+      />
       <Header setToggleBasket={setToggleBasket} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/bags" element={<ProductList title="Жіночі сумки" />} />
         <Route path="/underwears" element={<ProductList title="Брендова чоловіча білизна" />} />
-        <Route path="/:product/:productId" element={<ProductDeatails setCurrentPosition={setCurrentPosition} />} />
+        <Route path="/:product/:productId" element={ <ProductDeatails setCurrentPosition={setCurrentPosition} />} />
         <Route path="order-page" element={<OrderPage />} />
       </Routes>
       <Footer />
