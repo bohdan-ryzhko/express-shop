@@ -1,0 +1,11 @@
+.errorTitle {
+  text-align: center;
+}
+
+.errorImg {
+  background-image: url('../../images/error-page/error-page.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: calc(100vh - 200px);
+}

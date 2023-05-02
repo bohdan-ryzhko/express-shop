@@ -1,0 +1,19 @@
+@import '../../sass/helper';
+
+.closeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  transition: all 600ms ease-in-out;
+
+  & > svg {
+    fill: $--accent-color;
+  }
+
+  &:hover {
+    transform: rotate(180deg);
+  }
+}

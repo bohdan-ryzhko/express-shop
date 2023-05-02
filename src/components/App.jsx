@@ -28,6 +28,9 @@ export const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/bags" element={<ProductList title="Жіночі сумки" />} />
         <Route path="/underwears" element={<ProductList title="Брендова чоловіча білизна" />} />
+        <Route path="/socks" element={<ProductList title="Шкарпетки" />} />
+        <Route path="/linens" element={<ProductList title="Постільна білизна" />} />
+        <Route path="/glasses" element={<ProductList title="Окуляри" />} />
         <Route path="/:product/:productId" element={ <ProductDeatails setCurrentPosition={setCurrentPosition} />} />
         <Route path="order-page" element={<OrderPage />} />
       </Routes>

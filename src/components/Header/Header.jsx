@@ -16,6 +16,9 @@ export const Header = ({ setToggleBasket }) => {
 						<nav className={sass.headerNav}>
 							<NavLink className={sass.navLink} to="/bags" >Сумки</NavLink>
 							<NavLink className={sass.navLink} to="/underwears" >Чоловіча білизна</NavLink>
+							<NavLink className={sass.navLink} to="/socks" >Шкарпетки</NavLink>
+							<NavLink className={sass.navLink} to="/linens" >Постільна білизна</NavLink>
+							<NavLink className={sass.navLink} to="/glasses" >Окуляри</NavLink>
 						</nav>
 						<BasketButton setToggleBasket={setToggleBasket} />
 					</div>

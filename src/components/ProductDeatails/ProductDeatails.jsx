@@ -150,8 +150,7 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
                         name="decrement"
                         onClick={changeQuantity(-1)}
                         className={sass.decrement}
-                        type="button"
-                      >-</button>
+                        type="button">-</button>
                           <p className={sass.productQuantity}>
                             {
                               currentProduct === undefined
@@ -163,8 +162,7 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
                           name="increment"
                           onClick={changeQuantity(1)}
                           className={sass.increment}
-                          type="button"
-                        >+</button>
+                          type="button">+</button>
                     </div>
                   </div>
                   <button className={sass.productAdd} onClick={addToBasket} type="button">Додати до кошику</button>

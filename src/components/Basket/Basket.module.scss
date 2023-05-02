@@ -9,7 +9,7 @@
   height: 100vh;
   z-index: 5;
   background-color: #00000076;
-  transition: all 600ms cubic-bezier(1, 0.97, 0, 0.02);
+  transition: all 400ms cubic-bezier(1, 0.97, 0, 0.02);
 }
 
 .basketBackdrop {
@@ -37,7 +37,7 @@
   overflow-y: scroll;
   box-shadow: 0 0 100px #5b5b5b;
   transition: transform 600ms ease-in-out;
-  transition-delay: 600ms;
+  transition-delay: 400ms;
 }
 
 .basketBody {

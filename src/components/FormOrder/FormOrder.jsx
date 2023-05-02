@@ -9,7 +9,7 @@ import { initialValues } from "services/initialValues";
 import { fetchCountries } from "services/fetchCountries";
 import { createOrder } from "services/createOrder";
 
-export const FormOrder = () => {
+export const FormOrder = ({ setOrderSuccess, setOrderError }) => {
 	const [countries, setCountries] = useState([]);
 	const [selectedCode, setSelectedCode] = useState(null);
 	const [codeValue, setCodeValue] = useState("");
@@ -59,22 +59,24 @@ export const FormOrder = () => {
 			phone_number: codeValue,
 			order_list,
 			total_price,
-			order_state: "NEW",
+			order_status: "NEW",
 		});
 		const dataOrder = {
 			...values,
 			phone_number: codeValue,
 			order_list,
 			total_price,
-			order_state: "NEW"
+			order_status: "NEW"
 		}
 		createOrder(dataOrder)
 			.then(data => {
 				if(data.status !== 200) return Promise.reject(data)
 				console.log(data);
+				setOrderSuccess(data);
 			})
 			.catch(error => {
 				console.log(error);
+				setOrderError(error);
 			})
 		setCodeValue("");
 		resetForm();
