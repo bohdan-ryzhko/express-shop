@@ -22,19 +22,13 @@ export const ProductList = ({ title }) => {
 		setIsLoad(true);
 		const searchProduct = pathname.split(/[^A-Za-z]/).join("");
 
-		const pr = new Promise((res, rej) => {
-			res("res");
-		});
-		console.log(typeof pr);
-
 		fetchProduct(searchProduct, limit)
 			.then(data => {
 				if (data.status !== 200) return Promise.reject(data);
 				setError(null);
 				setProductList(data.data.products);
 				setTotalProducts(data.data.count);
-				console.log(data);
-				setIsLoad(false)
+				setIsLoad(false);
 			})
 			.catch(error => {
 				console.log(error);

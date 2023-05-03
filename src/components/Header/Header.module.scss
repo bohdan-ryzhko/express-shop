@@ -31,6 +31,10 @@
   display: flex;
   align-items: center;
   gap: 15px;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 }
 
 .navLink {
@@ -47,4 +51,42 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.burgerBtn,
+.backdropNavMenu {
+  @media screen and (min-width: 900px) {
+    display: none;
+  }
+}
+
+.backdropNavMenu,
+.backdropNavMenuActive {
+  position: fixed;
+  top: 0;
+  transition: all 600ms ease;
+}
+
+.backdropNavMenu {
+  left: -100%;
+}
+
+.backdropNavMenuActive {
+  left: 0;
+}
+
+.headerNavMenu {
+  display: flex;
+  width: 230px;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #fff;
+  height: 100vh;
+  padding: 45px 15px 15px 15px;
+}
+
+.openMenuMobile {
+  // & > svg {
+  //   color: $--accent-color;
+  // }
 }

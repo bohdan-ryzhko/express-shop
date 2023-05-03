@@ -32,7 +32,6 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
       .then(data => {
         if (data.status !== 200) return Promise.reject(data);
         setProductItem(data.data);
-        console.log(data)
         setIsLoad(false);
       })
       .catch(error => {

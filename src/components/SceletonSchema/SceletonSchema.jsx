@@ -4,6 +4,7 @@ import { Skeleton } from "@mui/material";
 export const SceletonSchema = () => {
 	return (
 		<div className="container">
+			<Skeleton variant="text" sx={{ fontSize: '3rem', width: "50%", margin: "0 auto" }} />
 			<div className={sass.loaderWrapper}>
 				<div className={sass.loaderItem}>
 					<Skeleton variant="rounded" sx={{ height: 350 }} />
