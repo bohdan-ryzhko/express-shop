@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Notify } from "notiflix";
+import { toast } from 'react-toastify';
 
 export const orderSlice = createSlice({
 	name: "basketOrders",
@@ -10,9 +10,12 @@ export const orderSlice = createSlice({
 		addProduct({ orderList }, { payload }) {
 			const repeatOrder = orderList.some(product => product.id === payload.id);
 
-			if (repeatOrder) return Notify.failure(`${payload.name_ua} вже є у кошику`);
+			if (repeatOrder) {
+				toast.warn(`${payload.name_ua} вже є у кошику`);
+				return;
+			};
 
-			Notify.success(`${payload.name_ua} додан до кошику`);
+			toast.success(`${payload.name_ua} додан до кошику`);
 			orderList.push(payload);
 		},
 		removeProduct({ orderList }, { payload }) {

@@ -9,6 +9,8 @@ import { initialValues } from "services/initialValues";
 import { fetchCountries } from "services/fetchCountries";
 import { createOrder } from "services/createOrder";
 
+import { toast } from 'react-toastify';
+
 export const FormOrder = ({ setOrderSuccess, setOrderError }) => {
 	const [countries, setCountries] = useState([]);
 	const [selectedCode, setSelectedCode] = useState(null);
@@ -73,9 +75,11 @@ export const FormOrder = ({ setOrderSuccess, setOrderError }) => {
 				if(data.status !== 200) return Promise.reject(data)
 				console.log(data);
 				setOrderSuccess(data);
+				toast.success("Замовлення успішно додано!");
 			})
 			.catch(error => {
 				console.log(error);
+				toast.error("Усі поля, окрім коментарія, повинні бути заповненими!");
 				setOrderError(error);
 			})
 		setCodeValue("");

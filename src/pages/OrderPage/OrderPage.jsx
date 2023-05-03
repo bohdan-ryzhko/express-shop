@@ -1,4 +1,3 @@
-import { OrderError } from "components/OrderError/OrderError";
 import sass from "./OrderPage.module.scss";
 import { FormOrder } from "components/FormOrder/FormOrder";
 import { OrderInfo } from "components/OrderInfo/OrderInfo";
@@ -20,10 +19,6 @@ export const OrderPage = () => {
 				<OrderSuccess order={orderSuccess} setOrderSuccess={setOrderSuccess} />
 			}
 			<div className="container">
-				{
-					orderError &&
-					<OrderError error={orderError} />
-				}
 				<div className={sass.orderInner}>
 					<h2 className={sass.orderTitle}>Оформлення замовлення</h2>
 					<div className={sass.orderWrapper}>

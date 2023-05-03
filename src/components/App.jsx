@@ -11,6 +11,9 @@ import { useState } from 'react';
 import { PAGINATION_ITEMS_COUNT } from 'constants/paginationItem';
 import { OrderPage } from 'pages/OrderPage/OrderPage';
 
+import { ToastContainer, Slide } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 
 export const App = () => {
 
@@ -19,10 +22,7 @@ export const App = () => {
 
   return (
     <>
-      <Basket
-        toggleBasket={toggleBasket}
-        setToggleBasket={setToggleBasket}
-      />
+      <Basket toggleBasket={toggleBasket} setToggleBasket={setToggleBasket} />
       <Header setToggleBasket={setToggleBasket} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -35,6 +35,18 @@ export const App = () => {
         <Route path="order-page" element={<OrderPage />} />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="colored"
+        transition={Slide}
+      />
     </>
   );
 };
