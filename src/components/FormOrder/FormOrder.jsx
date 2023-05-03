@@ -11,7 +11,7 @@ import { createOrder } from "services/createOrder";
 
 import { toast } from 'react-toastify';
 
-export const FormOrder = ({ setOrderSuccess, setOrderError }) => {
+export const FormOrder = ({ setOrderSuccess }) => {
 	const [countries, setCountries] = useState([]);
 	const [selectedCode, setSelectedCode] = useState(null);
 	const [codeValue, setCodeValue] = useState("");
@@ -80,7 +80,6 @@ export const FormOrder = ({ setOrderSuccess, setOrderError }) => {
 			.catch(error => {
 				console.log(error);
 				toast.error("Усі поля, окрім коментарія, повинні бути заповненими!");
-				setOrderError(error);
 			})
 		setCodeValue("");
 		resetForm();

@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 export const OrderPage = () => {
 	const [orderSuccess, setOrderSuccess] = useState(null);
-	const [orderError, setOrderError] = useState(null);
 
 	const orderList = useSelector(state => state.orderList.orderList);
 	const totalPrice = orderList.reduce((total, { count_price }) => total += Number(count_price), 0);
@@ -23,7 +22,7 @@ export const OrderPage = () => {
 					<h2 className={sass.orderTitle}>Оформлення замовлення</h2>
 					<div className={sass.orderWrapper}>
 						<div className={sass.orderForm}>
-							<FormOrder setOrderSuccess={setOrderSuccess} setOrderError={setOrderError} />
+							<FormOrder setOrderSuccess={setOrderSuccess} />
 						</div>
 						<div className={sass.orderInfo}>
 							<OrderInfo />
