@@ -91,7 +91,7 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
             <Link className={sass.backLink} to={backLinkRef.current}>
               <BiArrowBack size={30}/>
             </Link>
-            <h2 className={sass.productCardTitle}>{productItem.name_ua}</h2>
+            <h2 className={sass.productCardTitle}>{productItem?.name_ua || productItem?.name}</h2>
               <div className={sass.productCardThumb}>
                 {
                   Array.isArray(productItem.picture)
