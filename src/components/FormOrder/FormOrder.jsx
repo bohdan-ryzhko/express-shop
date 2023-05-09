@@ -2,7 +2,7 @@ import sass from "./FormOrder.module.scss";
 import { SelectCode } from "components/SelectCode/SelectCode";
 import { Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { initialValues } from "services/initialValues";
 
@@ -10,11 +10,13 @@ import { fetchCountries } from "services/fetchCountries";
 import { createOrder } from "services/createOrder";
 
 import { toast } from 'react-toastify';
+import { clearOrderList } from "redux/orderReducer";
 
 export const FormOrder = ({ setOrderSuccess }) => {
 	const [countries, setCountries] = useState([]);
 	const [selectedCode, setSelectedCode] = useState(null);
 	const [codeValue, setCodeValue] = useState("");
+	const dispatch = useDispatch()
 
 	const order_list = useSelector(state => {
 		return state.orderList.orderList.map(({ _id, id, name_ua, name, quantityProduct, price, count_price }) => {
@@ -76,6 +78,7 @@ export const FormOrder = ({ setOrderSuccess }) => {
 				console.log(data);
 				setOrderSuccess(data);
 				toast.success("Замовлення успішно додано!");
+				dispatch(clearOrderList());
 			})
 			.catch(error => {
 				console.log(error);

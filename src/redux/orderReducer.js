@@ -27,9 +27,12 @@ export const orderSlice = createSlice({
 			if (payload.target === "decrement" && findProduct.quantityProduct === 1) return;
 			findProduct.quantityProduct += payload.value;
 			findProduct.count_price = findProduct.quantityProduct * Number(findProduct.price);
+		},
+		clearOrderList(state) {
+			state.orderList = [];
 		}
 	}
 });
 
-export const { addProduct, removeProduct, changeQuantityProduct } = orderSlice.actions;
+export const { addProduct, removeProduct, changeQuantityProduct, clearOrderList } = orderSlice.actions;
 export default orderSlice.reducer;
