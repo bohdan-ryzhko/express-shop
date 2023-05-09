@@ -11,11 +11,11 @@ export const orderSlice = createSlice({
 			const repeatOrder = orderList.some(product => product.id === payload.id);
 
 			if (repeatOrder) {
-				toast.warn(`${payload.name_ua} вже є у кошику`);
+				toast.warn(`${payload.name_ua || payload.name} вже є у кошику`);
 				return;
 			};
 
-			toast.success(`${payload.name_ua} додан до кошику`);
+			toast.success(`${payload.name_ua || payload.name} додан до кошику`);
 			orderList.push(payload);
 		},
 		removeProduct({ orderList }, { payload }) {

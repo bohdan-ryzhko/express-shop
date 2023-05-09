@@ -80,4 +80,13 @@
   &:hover {
     background-color: $--hover-color;
   }
+
+  &:disabled {
+    background-color: #b7b7b7;
+    color: #7a7a7a;
+    cursor: no-drop;
+  }
+}
+
+.formCheckbox {
 }

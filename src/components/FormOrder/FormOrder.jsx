@@ -17,8 +17,8 @@ export const FormOrder = ({ setOrderSuccess }) => {
 	const [codeValue, setCodeValue] = useState("");
 
 	const order_list = useSelector(state => {
-		return state.orderList.orderList.map(({ _id, id, name_ua, quantityProduct, price, count_price }) => {
-			return { _id, id, name_ua, quantityProduct, price, count_price }
+		return state.orderList.orderList.map(({ _id, id, name_ua, name, quantityProduct, price, count_price }) => {
+			return { _id, id, name_ua, name, quantityProduct, price, count_price }
 		});
 	});
 
@@ -87,66 +87,75 @@ export const FormOrder = ({ setOrderSuccess }) => {
 
 	return (
 		<Formik onSubmit={onSubmit} initialValues={initialValues}>
-			<Form className={sass.orderForm}>
-				<label htmlFor="name">
-					<span className={sass.orderPrompt}>Ім'я</span>
-					<Field id="name" name="name" />
-				</label>
-				<label htmlFor="last_name">
-					<span className={sass.orderPrompt}>Прізвище</span>
-					<Field id="last_name" name="last_name" />
-				</label>
-				<label htmlFor="surname">
-					<span className={sass.orderPrompt}>По батькові</span>
-					<Field id="surname" name="surname" />
-				</label>
-				<div className={sass.selectPhone}>
-					<SelectCode
-						className={sass.select}
-						selectedCode={selectedCode}
-						setSelectedCode={setSelectedCode}
-						countries={countries && countries}
-					/>
-					<label htmlFor="phone_number">
-					<span className={sass.orderPrompt}>Номер телефону</span>
-						<Field
-							value={codeValue}
-							onChange={changePhone}
-							className={sass.inputPhone}
-							id="phone_number"
-							type="tel"
-							name="phone_number"
-							placeholder=""
-						/>
-					</label>
-				</div>
-				<label htmlFor="email">
-					<span className={sass.orderPrompt}>Ел. адреса</span>
-					<Field id="email" type="email" name="email" placeholder="" />
-				</label>
-				<label htmlFor="country">
-					<span className={sass.orderPrompt}>Країна</span>
-					<Field id="country" type="text" name="country" placeholder="" />
-				</label>
-				<label htmlFor="state">
-					<span className={sass.orderPrompt}>КРАЙ/ОБЛАСТЬ/РЕГІОН</span>
-					<Field id="state" type="text" name="state" placeholder="" />
-				</label>
-				<label htmlFor="city">
-					<span className={sass.orderPrompt}>Місто</span>
-					<Field id="city" type="text" name="city" placeholder="" />
-				</label>
-				<label htmlFor="street">
-					<span className={sass.orderPrompt}>ВУЛИЦЯ, БУДИНОК, КВАРТИРА</span>
-					<Field id="street" type="text" name="street" placeholder="" />
-				</label>
-				<label htmlFor="post_index">
-					<span className={sass.orderPrompt}>ПОШТОВИЙ ІНДЕКС</span>
-					<Field id="post_index" type="text" name="post_index" placeholder="" />
-				</label>
-				<Field className={sass.formComment} component="textarea" type="text" name="comment" placeholder="Залиште свій коментарій..." />
-				<button className={sass.submitBtn} type="submit">Відправити заказ</button>
-			</Form>
+			{
+				({ values }) => (
+					<Form className={sass.orderForm}>
+						<label htmlFor="name">
+							<span className={sass.orderPrompt}>Ім'я</span>
+							<Field id="name" name="name" />
+						</label>
+						<label htmlFor="last_name">
+							<span className={sass.orderPrompt}>Прізвище</span>
+							<Field id="last_name" name="last_name" />
+						</label>
+						<label htmlFor="surname">
+							<span className={sass.orderPrompt}>По батькові</span>
+							<Field id="surname" name="surname" />
+						</label>
+						<div className={sass.selectPhone}>
+							<SelectCode
+								className={sass.select}
+								selectedCode={selectedCode}
+								setSelectedCode={setSelectedCode}
+								countries={countries && countries}
+							/>
+							<label htmlFor="phone_number">
+							<span className={sass.orderPrompt}>Номер телефону</span>
+								<Field
+									value={codeValue}
+									onChange={changePhone}
+									className={sass.inputPhone}
+									id="phone_number"
+									type="tel"
+									name="phone_number"
+									placeholder=""
+								/>
+							</label>
+						</div>
+						<label htmlFor="email">
+							<span className={sass.orderPrompt}>Ел. адреса</span>
+							<Field id="email" type="email" name="email" placeholder="" />
+						</label>
+						<label htmlFor="country">
+							<span className={sass.orderPrompt}>Країна</span>
+							<Field id="country" type="text" name="country" placeholder="" />
+						</label>
+						<label htmlFor="state">
+							<span className={sass.orderPrompt}>КРАЙ/ОБЛАСТЬ/РЕГІОН</span>
+							<Field id="state" type="text" name="state" placeholder="" />
+						</label>
+						<label htmlFor="city">
+							<span className={sass.orderPrompt}>Місто</span>
+							<Field id="city" type="text" name="city" placeholder="" />
+						</label>
+						<label htmlFor="street">
+							<span className={sass.orderPrompt}>ВУЛИЦЯ, БУДИНОК, КВАРТИРА</span>
+							<Field id="street" type="text" name="street" placeholder="" />
+						</label>
+						<label htmlFor="post_index">
+							<span className={sass.orderPrompt}>ПОШТОВИЙ ІНДЕКС</span>
+							<Field id="post_index" type="text" name="post_index" placeholder="" />
+						</label>
+						<Field className={sass.formComment} component="textarea" type="text" name="comment" placeholder="Залиште свій коментарій..." />
+						<label>
+							<Field className={sass.formCheckbox} type="checkbox" name="isAgree" />
+							{`${values.isAgree}`}
+							Я даю згоду на обробку моїх персональних даних
+						</label>
+						<button disabled={!values.isAgree} className={sass.submitBtn} type="submit">Відправити заказ</button>
+					</Form>
+				)
+			}
 		</Formik>
 	)
 }

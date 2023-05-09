@@ -58,7 +58,7 @@ export const ProductList = ({ title }) => {
 								<ul className={sass.product__list}>
 									{
 										productList.length > 0 &&
-										productList.map(product => <Product product={product} key={product.id} />)
+										productList.map(product => <Product product={product} key={product._id} />)
 									}
 								</ul>
 								{

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import sass from './Footer.module.scss';
 
 import { BsInstagram, BsFacebook, BsTelegram, BsTiktok } from 'react-icons/bs';
@@ -35,6 +36,7 @@ export const Footer = () => (
           </ul>
         </div>
       </div>
+    <span style={{ textDecoration: "underline" }} className={sass.CR}> <Link to="data-processing"> Політика конфіденційності </Link> </span>
     <span className={sass.CR}>Expess shop 2023© Всі права захищені </span>
   </footer>
 );

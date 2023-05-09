@@ -10,4 +10,5 @@ export const initialValues = Object.freeze({
 	street: "",
 	post_index: "",
 	comment: "",
+	isAgree: false,
 });

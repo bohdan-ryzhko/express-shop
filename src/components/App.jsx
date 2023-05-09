@@ -13,6 +13,7 @@ import { OrderPage } from 'pages/OrderPage/OrderPage';
 
 import { ToastContainer, Slide } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { DataProcessing } from 'pages/DataProcessing/DataProcessing';
 
 
 export const App = () => {
@@ -33,6 +34,7 @@ export const App = () => {
         <Route path="/glasses" element={<ProductList title="Окуляри" />} />
         <Route path="/:product/:productId" element={ <ProductDeatails setCurrentPosition={setCurrentPosition} />} />
         <Route path="order-page" element={<OrderPage />} />
+        <Route path="data-processing" element={<DataProcessing />} />
       </Routes>
       <Footer />
       <ToastContainer

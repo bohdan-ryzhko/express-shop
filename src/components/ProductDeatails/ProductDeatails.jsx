@@ -24,13 +24,14 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
   const [isLoad, setIsLoad] = useState(false);
 
   const { orderList } = useSelector(state => state.orderList);
-  const currentProduct = orderList.find(product => product._id === productId);
+  const currentProduct = orderList.find(product => product.id === productId);
 
   useEffect(() => {
     setIsLoad(true);
     fetchProductDetails(product, productId)
       .then(data => {
         if (data.status !== 200) return Promise.reject(data);
+        console.log(data);
         setProductItem(data.data);
         setIsLoad(false);
       })
@@ -125,14 +126,14 @@ export const ProductDeatails = ({ setCurrentPosition }) => {
                     productItem.vendor &&
                     <p className={sass.brand}>Бренд: {productItem.vendor}</p>
                   }
-                  <p className={sass.productDescription}>{productItem.description_ua}</p>
+                  <p className={sass.productDescription}>{productItem?.description_ua || productItem?.description}</p>
                   <div className={sass.productCardSizes}>
                     {
                       productItem.param[2] &&
                       <>
                         <p>Виберіть розмір:</p>
                         {
-                          productItem.param[2].text.split('|').map(el => (
+                          productItem.param[2].text?.split('|').map(el => (
                             <button type="radio" name="sizes" value={el} key={el}>
                               {el}
                             </button>

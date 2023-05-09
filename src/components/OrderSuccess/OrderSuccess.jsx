@@ -24,7 +24,7 @@ export const OrderSuccess = ({ order: { data: { order } }, setOrderSuccess }) =>
 						<ul className={sass.checkList}>
 							{
 								order.order_list.map(product => <li key={product.id} className={sass.checkListItem}>
-									<p>Назва: {product.name_ua}</p>
+									<p>Назва: {product.name_ua || product.name}</p>
 									<p>Кількість: {product.quantityProduct}</p>
 									<p>Ціна: {product.count_price}</p>
 								</li>)
