@@ -17,6 +17,16 @@ import { DataProcessing } from 'pages/DataProcessing/DataProcessing';
 
 
 export const App = () => {
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/api/underwears?sort=desc`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       data.forEach(element => {
+  //         console.log(element.price);
+  //       });
+  //       console.log(data)
+  //     });
+  // }, []);
 
   const [toggleBasket, setToggleBasket] = useState(false);
   const [, setCurrentPosition] = useState(PAGINATION_ITEMS_COUNT);
