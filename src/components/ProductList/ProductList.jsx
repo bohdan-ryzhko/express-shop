@@ -40,13 +40,32 @@ export const ProductList = ({ title }) => {
 	useEffect(() => {
 		setIsLoad(true);
 
+		fetchProductsSortByPrice(searchProduct, sortBy)
+			.then(data => {
+				console.log(data);
+				if (data.status !== 200) throw new Error(data);
+				setMinPrice(getMinPrice(data.data));
+				setMaxPrice(getMaxPrice(data.data));
+				if (isSortedList) {
+					setSortedProductsItems(getPaginationList(data.data, limit));
+					setIsLoad(false);
+				}
+			});
+	}, [searchProduct, sortBy, limit, isSortedList]);
+
+	useEffect(() => {
+		setIsLoad(true);
+		// setIsSortedList(false);
+		setSortBy("asc");
+
 		fetchProduct(searchProduct, limit)
 			.then(data => {
 				if (data.status !== 200) throw new Error(data);
 				setError(null);
 				setProductList(data.data.products);
 				setTotalProducts(data.data.count);
-				
+				setMinPrice(getMinPrice(data.data.products));
+				setMaxPrice(getMaxPrice(data.data.products));
 				setIsLoad(false);
 			})
 			.catch(error => {
@@ -54,18 +73,7 @@ export const ProductList = ({ title }) => {
 				setError(error);
 				setIsLoad(false)
 			});
-	}, [limit, searchProduct]);
-
-	useEffect(() => {
-		fetchProductsSortByPrice(searchProduct, sortBy)
-			.then(data => {
-				console.log(data);
-				if (data.status !== 200) throw new Error(data);
-				setSortedProductsItems(getPaginationList(data.data, limit));
-				setMinPrice(getMinPrice(data.data));
-				setMaxPrice(getMaxPrice(data.data));
-			});
-	}, [searchProduct, sortBy, limit]);
+	}, [limit, searchProduct, isSortedList, sortBy]);
 
 	const handleLoadMore = () => {
 		setLimit(prevState => prevState + 12);
@@ -80,8 +88,7 @@ export const ProductList = ({ title }) => {
 	return (
 		<>
 			{
-				(isLoad && limit <= 12) &&
-				<SceletonSchema />
+				(isLoad && limit <= 12) && <SceletonSchema />
 			}
 			{
 				error
