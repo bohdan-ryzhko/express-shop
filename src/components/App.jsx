@@ -2,43 +2,34 @@ import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
 import { ProductDeatails } from './ProductDeatails/ProductDeatails';
 
-import underwearData from '../data/underwear';
-import bagsData from "../data/bags";
 import { ProductList } from './ProductList/ProductList';
 import { Routes, Route } from 'react-router-dom';
-import { Home } from './Home/Home';
+import { Home } from '../pages/Home/Home';
 import { Basket } from './Basket/Basket';
 import { useState } from 'react';
 
 import { PAGINATION_ITEMS_COUNT } from 'constants/paginationItem';
+import { OrderPage } from 'pages/OrderPage/OrderPage';
 
-const {
-  yml_catalog: {
-    shop: {
-      categories: {
-        category: { underwearTitle },
-      },
-      offers: { underwear },
-    },
-  },
-} = underwearData;
+import { ToastContainer, Slide } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { DataProcessing } from 'pages/DataProcessing/DataProcessing';
 
-const {
-  yml_catalog: {
-    shop: {
-      categories: {
-        category: { bagsTitlte }
-      }, offers: {
-        bags
-      }
-    }
-  }
-} = bagsData;
 
 export const App = () => {
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/api/underwears?sort=desc`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       data.forEach(element => {
+  //         console.log(element.price);
+  //       });
+  //       console.log(data)
+  //     });
+  // }, []);
 
   const [toggleBasket, setToggleBasket] = useState(false);
-  const [currentPosition, setCurrentPosition] = useState(PAGINATION_ITEMS_COUNT);
+  const [, setCurrentPosition] = useState(PAGINATION_ITEMS_COUNT);
 
   return (
     <>
@@ -46,21 +37,28 @@ export const App = () => {
       <Header setToggleBasket={setToggleBasket} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/bags" element={<ProductList
-          setCurrentPosition={setCurrentPosition}
-          currentPosition={currentPosition}
-          title={bagsTitlte}
-          list={bags}
-        />} />
-        <Route path="/underwear" element={<ProductList
-          setCurrentPosition={setCurrentPosition}
-          currentPosition={currentPosition}
-          title={underwearTitle}
-          list={underwear}
-        />} />
-        <Route path="/:product/:productId" element={<ProductDeatails setCurrentPosition={setCurrentPosition} />} />
+        <Route path="/bags" element={<ProductList title="Жіночі сумки" />} />
+        <Route path="/underwears" element={<ProductList title="Брендова чоловіча білизна" />} />
+        <Route path="/socks" element={<ProductList title="Шкарпетки" />} />
+        <Route path="/linens" element={<ProductList title="Постільна білизна" />} />
+        <Route path="/glasses" element={<ProductList title="Окуляри" />} />
+        <Route path="/:product/:productId" element={ <ProductDeatails setCurrentPosition={setCurrentPosition} />} />
+        <Route path="order-page" element={<OrderPage />} />
+        <Route path="data-processing" element={<DataProcessing />} />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="colored"
+        transition={Slide}
+      />
     </>
   );
 };

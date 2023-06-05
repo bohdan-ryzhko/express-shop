@@ -1,0 +1,29 @@
+@import '../../sass/helper';
+
+.orderPage {
+  padding: 20px 0;
+}
+
+.orderTitle {
+  font-size: 45px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.orderInfo {
+  width: 100%;
+  margin: 0 auto;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.orderForm {
+  width: 100%;
+}
+
+.totalTitle {
+  font-size: 20px;
+  font-weight: 500;
+  color: $--accent-color;
+}

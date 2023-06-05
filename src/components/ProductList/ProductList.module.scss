@@ -1,17 +1,10 @@
+@import '../../sass/helper';
+
 .product__list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 30px;
-}
-
-.main__productPage {
-}
-
-.product__listInner {
-}
-
-.quantityPosition {
 }
 
 .pagination {

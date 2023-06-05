@@ -9,7 +9,7 @@
   height: 100vh;
   z-index: 5;
   background-color: #00000076;
-  transition: all 600ms cubic-bezier(1, 0.97, 0, 0.02);
+  transition: all 400ms cubic-bezier(1, 0.97, 0, 0.02);
 }
 
 .basketBackdrop {
@@ -37,7 +37,7 @@
   overflow-y: scroll;
   box-shadow: 0 0 100px #5b5b5b;
   transition: transform 600ms ease-in-out;
-  transition-delay: 600ms;
+  transition-delay: 400ms;
 }
 
 .basketBody {
@@ -65,6 +65,9 @@
     transform: rotate(180deg);
   }
 }
+.basketInner {
+  margin-bottom: 20px;
+}
 
 .basketTitlte {
   text-align: center;
@@ -74,8 +77,23 @@
 .orderList {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 30px;
   border-bottom: 1px solid #000;
   padding-bottom: 10px;
   margin-bottom: 20px;
+}
+
+.makeOrderLink {
+  display: block;
+  width: 100%;
+  background-color: $--accent-color;
+  color: #fff;
+  padding: 15px 0;
+  border-radius: 7px;
+  text-align: center;
+  transition: all 300ms ease;
+
+  &:hover {
+    background-color: $--hover-color;
+  }
 }

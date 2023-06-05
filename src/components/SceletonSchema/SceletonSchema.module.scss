@@ -1,0 +1,21 @@
+@import '../../sass/helper';
+
+.loaderWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.loaderItem {
+  flex-basis: 100%;
+
+  @include tablet {
+    flex-basis: calc(100% / 2 - 30px);
+  }
+
+  @include desktop {
+    flex-basis: calc(100% / 3 - 30px);
+  }
+}

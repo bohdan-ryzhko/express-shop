@@ -1,0 +1,1 @@
+export const regexSplitLetters = /[^A-Za-z]/;

@@ -4,6 +4,20 @@
   padding: 20px 0;
 }
 
+.loaderContent {
+  @include desktop {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+}
+
+.loadImg {
+  @media screen and (max-width: 1100px) {
+    margin: 0 auto;
+  }
+}
+
 .backLink {
   transition: all 300ms ease;
   border-radius: 100%;
@@ -93,10 +107,14 @@
 
 .quantityWrapper {
   margin-top: 20px;
+  display: flex;
 }
 
 .productQuantity {
-  max-width: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: 1px solid #000;
   height: 100%;
