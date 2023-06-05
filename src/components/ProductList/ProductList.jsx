@@ -9,7 +9,7 @@ import { fetchProduct } from "services/fetchProduct";
 import { SceletonSchema } from "components/SceletonSchema/SceletonSchema";
 import { ErrorPage } from "pages/ErrorPage/ErrorPage";
 
-import { FiArrowUp, FiArrowDown } from 'react-icons/fi';
+// import { FiArrowUp, FiArrowDown } from 'react-icons/fi';
 import { CastomMultiRange } from "components/CastomMultyRange/CastomMultiRange";
 import { getMinPrice, getMaxPrice } from "services/calcPrice";
 
@@ -32,7 +32,7 @@ export const ProductList = ({ title }) => {
 	const [maxPrice, setMaxPrice] = useState(0);
 	const [sortBy, setSortBy] = useState("asc");
 	const [sortedProductsItems, setSortedProductsItems] = useState([]);
-	const [isSortedList, setIsSortedList] = useState(false);
+	// const [isSortedList, setIsSortedList] = useState(false);
 
 	const { pathname } = useLocation();
 	const searchProduct = pathname.split(regexSplitLetters).join("");
@@ -46,23 +46,25 @@ export const ProductList = ({ title }) => {
 				if (data.status !== 200) throw new Error(data);
 				setMinPrice(getMinPrice(data.data));
 				setMaxPrice(getMaxPrice(data.data));
-				if (isSortedList) {
-					setSortedProductsItems(getPaginationList(data.data, limit));
-					setIsLoad(false);
-				}
+				setProductList(data.data);
+				// if (isSortedList) {
+				// 	setSortedProductsItems(getPaginationList(data.data, limit));
+				// 	setIsLoad(false);
+				// }
 			});
-	}, [searchProduct, sortBy, limit, isSortedList]);
+	}, [searchProduct, sortBy, limit]);
 
 	useEffect(() => {
 		setIsLoad(true);
 		// setIsSortedList(false);
-		setSortBy("asc");
+		// setSortBy("asc");
 
 		fetchProduct(searchProduct, limit)
 			.then(data => {
 				if (data.status !== 200) throw new Error(data);
 				setError(null);
 				setProductList(data.data.products);
+				console.log(data.data.products)
 				setTotalProducts(data.data.count);
 				setMinPrice(getMinPrice(data.data.products));
 				setMaxPrice(getMaxPrice(data.data.products));
@@ -73,17 +75,17 @@ export const ProductList = ({ title }) => {
 				setError(error);
 				setIsLoad(false)
 			});
-	}, [limit, searchProduct, isSortedList, sortBy]);
+	}, [limit, searchProduct]);
 
 	const handleLoadMore = () => {
 		setLimit(prevState => prevState + 12);
 	}
 
-	const onSortProducts = ({ target }) => {
-		console.log(target.name);
-		setIsSortedList(true);
-		setSortBy(changeSortBy);
-	}
+	// const onSortProducts = ({ target }) => {
+	// 	console.log(target.name);
+	// 	setIsSortedList(true);
+	// 	setSortBy(changeSortBy);
+	// }
 
 	return (
 		<>
@@ -98,29 +100,29 @@ export const ProductList = ({ title }) => {
 							<div className="container">
 								<div className={sass.product__listInner}>
 									<span className={sass.quantityPosition}>Кількість позицій: {totalProducts}</span>
-									<button
+									{/* <button
 										onClick={onSortProducts}
 										name={sortBy}
 										type="button">Sort
 										{sortBy === "asc" && <FiArrowDown />}
 										{sortBy === "desc" && <FiArrowUp />}
-									</button>
+									</button> */}
 									<CastomMultiRange
 										min={minPrice}
 										max={maxPrice}
 										onChange={(obj) => console.log(obj)}
 									/>
 									<ProductTitle title={title} />
-									<ul className={sass.product__list}>
+									{/* <ul className={sass.product__list}>
 										{
 											(!isSortedList && productList.length > 0) &&
 											productList.map(product => <Product product={product} key={product._id} />)
 										}
-									</ul>
+									</ul> */}
 									<ul className={sass.product__list}>
 										{
-											(isSortedList && sortedProductsItems.length > 0) &&
-											sortedProductsItems.map(product => <Product product={product} key={product._id} />)
+											productList.length > 0 &&
+											productList.map(product => <Product product={product} key={product._id} />)
 										}
 									</ul>
 									{
